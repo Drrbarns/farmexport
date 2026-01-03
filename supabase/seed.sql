@@ -3,13 +3,13 @@
 -- 1. Site Settings
 insert into site_settings (business_name, phone, whatsapp, email, address, socials, seo_defaults)
 values (
-  'Africma’s & Dakeb Farm LTD',
-  '+233555123456',
-  '233555123456',
+  'Africma's & Dakeb Farm LTD',
+  '+233248209525',
+  '233248209525',
   'export@africmadakeb.com',
-  'Accra, Greater Accra, Ghana',
+  'P.O Box Legon Accra Headquarters | Branch: Tamale - Fou',
   '{"linkedin": "https://linkedin.com", "facebook": "https://facebook.com", "instagram": "https://instagram.com"}'::jsonb,
-  '{"site_title": "Africma’s & Dakeb Farm LTD | Premium Agricultural Exporter Ghana", "site_description": "Exporting Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean, and Baobab Oil globally. Reliable supply from Ghana."}'::jsonb
+  '{"site_title": "Africma's & Dakeb Farm LTD | Premium Agricultural Exporter Ghana", "site_description": "Exporting Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean, and Baobab Oil globally. Reliable supply from Ghana."}'::jsonb
 );
 
 -- 2. Products & Specs

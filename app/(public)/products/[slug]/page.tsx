@@ -51,7 +51,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
            </div>
            <div className="flex gap-3">
              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
-               <Link href="https://wa.me/233555123456" target="_blank">
+               <Link href="https://wa.me/233248209525" target="_blank">
                 <Phone className="mr-2 h-4 w-4" /> WhatsApp
                </Link>
              </Button>
@@ -267,7 +267,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         <Link href={`/rfq?product=${product.id}`}>Request Quote</Link>
                       </Button>
                       <Button size="lg" variant="outline" className="w-full bg-transparent text-white border-white/20 hover:bg-white/10 hover:text-white" asChild>
-                        <Link href="https://wa.me/233555123456">
+                        <Link href="https://wa.me/233248209525">
                           <Phone className="mr-2 h-4 w-4" /> WhatsApp Sales
                         </Link>
                       </Button>

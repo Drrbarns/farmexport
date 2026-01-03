@@ -127,7 +127,7 @@ export function RFQForm({ products }: { products: any[] }) {
           </div>
           <div className="flex justify-center gap-4 pt-4">
             <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white" asChild>
-              <a href={`https://wa.me/233555123456?text=Hi, I just submitted RFQ ${rfqNo}. Can we discuss?`}>
+              <a href={`https://wa.me/233248209525?text=Hi, I just submitted RFQ ${rfqNo}. Can we discuss?`}>
                 Chat on WhatsApp
               </a>
             </Button>

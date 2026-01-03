@@ -60,11 +60,11 @@ export function Footer() {
             <ul className="space-y-4 text-slate-400">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                <span>Accra, Greater Accra, Ghana</span>
+                <span>P.O Box Legon Accra Headquarters<br />Branch: Tamale - Fou</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-accent shrink-0" />
-                <span>+233 55 512 3456</span>
+                <span>+233 24 820 9525</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-accent shrink-0" />

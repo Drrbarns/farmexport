@@ -72,8 +72,8 @@ export default function ContactPage() {
                   title="Headquarters"
                   details={
                     <>
-                      Eric Abang Amewuda Street<br />
-                      Adjiringanor, Accra, Ghana
+                      P.O Box Legon Accra Headquarters<br />
+                      Branch: Tamale - Fou
                     </>
                   }
                 />
@@ -81,8 +81,8 @@ export default function ContactPage() {
                 <ContactInfoItem
                   icon={Phone}
                   title="Phone & WhatsApp"
-                  details="+233 55 512 3456"
-                  link="https://wa.me/233555123456"
+                  details="+233 24 820 9525"
+                  link="https://wa.me/233248209525"
                   linkText="Chat on WhatsApp"
                 />
 

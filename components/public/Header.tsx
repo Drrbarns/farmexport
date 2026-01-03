@@ -86,7 +86,7 @@ export function Header() {
 
         <div className="hidden lg:flex items-center gap-4">
           <a 
-            href="https://wa.me/233555123456" 
+            href="https://wa.me/233248209525" 
             className={cn(
               "text-sm font-bold flex items-center gap-2 px-4 py-2 rounded-full transition-colors",
               scrolled ? "text-slate-700 hover:bg-slate-100" : "text-white hover:bg-white/10"
