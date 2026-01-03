@@ -149,8 +149,8 @@ export function Sidebar() {
             <BarChart className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-64 bg-slate-100/50">
-          <div className="flex h-screen flex-col">
+        <SheetContent side="left" className="p-0 w-64 bg-white">
+          <div className="flex h-screen flex-col bg-white">
             {sidebarContent}
           </div>
         </SheetContent>
