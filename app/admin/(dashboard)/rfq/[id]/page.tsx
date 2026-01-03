@@ -7,15 +7,16 @@ import { RFQStatusForm } from '@/components/admin/RFQStatusForm'
 export const revalidate = 0
 
 interface RFQDetailPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function RFQDetailPage({ params }: RFQDetailPageProps) {
   const supabase = await createClient()
+  const { id } = await params
   const { data: rfq } = await supabase
     .from('rfqs')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (!rfq) {

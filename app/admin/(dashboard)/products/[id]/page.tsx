@@ -5,12 +5,12 @@ import { ProductForm } from '@/components/admin/ProductForm'
 export const revalidate = 0
 
 interface EditProductPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
   const supabase = await createClient()
-  const { id } = params
+  const { id } = await params
 
   const { data: product } = await supabase
     .from('products')

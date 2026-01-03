@@ -5,14 +5,14 @@ import { CMSForm } from '@/components/admin/CMSForm'
 export const revalidate = 0
 
 interface EditCMSPageProps {
-  params: { key: string }
-  searchParams: { section?: string }
+  params: Promise<{ key: string }>
+  searchParams: Promise<{ section?: string }>
 }
 
 export default async function EditCMSPage({ params, searchParams }: EditCMSPageProps) {
   const supabase = await createClient()
-  const { key } = params
-  const sectionTitle = searchParams.section
+  const { key } = await params
+  const { section: sectionTitle } = await searchParams
 
   let query = supabase
     .from('page_sections')
