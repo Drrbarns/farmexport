@@ -19,9 +19,9 @@ export default async function AboutPage() {
     .single()
 
   const content = section?.content as any || {
-    mission: 'To bridge the gap between Ghanaian farmers and global markets through ethical sourcing and quality assurance.',
-    vision: 'To be the leading agricultural exporter from Ghana, known for reliability, quality, and sustainable practices.',
-    story: 'Founded in Accra, Ghana, Africma\'s & Dakeb Farm LTD was established to connect local farming communities with international buyers seeking premium, unrefined agricultural products. We work directly with over 500 farmers across Ghana to source Grade A shea butter, shea oil, soybean, and baobab oil.'
+    mission: 'To bridge the gap between African farmers and global markets through ethical sourcing and quality assurance.',
+    vision: 'To be the leading agricultural exporter from Africa, known for reliability, quality, and sustainable practices.',
+    story: 'Founded in Accra, Ghana, Africma\'s & Dakeb Farm LTD was established to connect local farming communities across Africa with international buyers seeking premium, unrefined agricultural products. We work directly with over 500 farmers across the continent to source Grade A shea butter, shea oil, soybean, and baobab oil.'
   }
 
   const stats = [
@@ -78,7 +78,7 @@ export default async function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-4">
-                Est. 2022 • Accra, Ghana
+                Est. 2022 • Africa
               </span>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
                 Cultivating Excellence, <br />
@@ -92,7 +92,7 @@ export default async function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
             >
-              Connecting the rich soils of Ghana to the global market through sustainable agriculture and ethical partnerships.
+              Connecting the rich soils of Africa to the global market through sustainable agriculture and ethical partnerships.
             </motion.p>
           </div>
         </Container>
@@ -257,7 +257,7 @@ export default async function AboutPage() {
             <div className="relative z-10">
               <h3 className="text-2xl font-bold mb-4">Ready to source premium African produce?</h3>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                Join our network of international buyers and experience the quality of Ghana's finest exports.
+                Join our network of international buyers and experience the quality of Africa's finest exports.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="text-lg px-8 py-6" asChild>

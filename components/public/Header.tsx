@@ -146,7 +146,7 @@ export function Header() {
                     </Button>
                   </SheetClose>
                   <p className="text-center text-xs font-medium text-slate-400 uppercase tracking-wider">
-                    Premium Ghanaian Exports
+                    Premium African Exports
                   </p>
                 </div>
               </div>

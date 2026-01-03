@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Africma’s & Dakeb Farm LTD | Premium Agricultural Exporter",
-  description: "Exporting Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean, and Baobab Oil globally from Ghana.",
+  description: "Exporting Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean, and Baobab Oil globally from Africa.",
 };
 
 export default function RootLayout({

@@ -9,7 +9,7 @@ export default async function Home() {
       id: '1',
       name: 'Unrefined (Grade A) Shea Butter',
       slug: 'unrefined-shea-butter-grade-a',
-      short_desc: 'Premium Grade A unrefined shea butter, sourced directly from Ghanaian women cooperatives.',
+      short_desc: 'Premium Grade A unrefined shea butter, sourced directly from African women cooperatives.',
       spec_sheets: []
     },
     {

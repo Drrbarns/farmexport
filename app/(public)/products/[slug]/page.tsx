@@ -100,7 +100,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {/* Key Specs Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                {[
-                 { label: "Origin", value: specs.origin || "Ghana" },
+                 { label: "Origin", value: specs.origin || "Africa" },
                  { label: "Grade", value: specs.grade_type || "Premium" },
                  { label: "MOQ", value: specs.moq || "Negotiable" },
                  { label: "Shelf Life", value: specs.shelf_life || "24 Months" },
@@ -197,7 +197,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                           <Globe className="mr-2 h-5 w-5 text-primary" /> Global Shipping
                         </h4>
                         <p className="text-sm text-muted-foreground">
-                          We ship via air and sea freight from Tema Port, Ghana. Supported Incoterms: EXW, FOB, CIF.
+                          We ship via air and sea freight from major African ports. Supported Incoterms: EXW, FOB, CIF.
                         </p>
                      </div>
                   </CardContent>

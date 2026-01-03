@@ -21,7 +21,7 @@ export default async function ExportReadinessPage() {
   const content = section?.content as any || {
     shipping_methods: ["Sea Freight (FCL/LCL)", "Air Freight", "Express Courier"],
     incoterms: ["EXW", "FOB", "CIF"],
-    ports: ["Tema Port, Ghana"],
+    ports: ["Major African Ports (Tema, Lagos, Mombasa, Durban)"],
     quality_assurance: 'All products undergo rigorous testing before shipment.'
   }
 

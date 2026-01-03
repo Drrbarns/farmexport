@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS suppliers (
   contact_person text,
   phone text,
   whatsapp text,
-  location text NOT NULL, -- Region in Ghana
+  location text NOT NULL, -- Region/Country in Africa
   products_supplied text[], -- Array of product types
   rating numeric, -- 1-5 star rating
   payment_terms text,
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS shipments (
   container_no text,
   container_type text, -- 20ft, 40ft, 40ft HC
   bill_of_lading_no text,
-  departure_port text DEFAULT 'Tema Port, Ghana',
+  departure_port text DEFAULT 'Major African Port',
   destination_port text NOT NULL,
   etd date, -- Estimated Time of Departure
   eta date, -- Estimated Time of Arrival

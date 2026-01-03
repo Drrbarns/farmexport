@@ -9,7 +9,7 @@ values (
   'export@africmadakeb.com',
   'P.O Box Legon Accra Headquarters | Branch: Tamale - Fou',
   '{"linkedin": "https://linkedin.com", "facebook": "https://facebook.com", "instagram": "https://instagram.com"}'::jsonb,
-  '{"site_title": "Africma's & Dakeb Farm LTD | Premium Agricultural Exporter Ghana", "site_description": "Exporting Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean, and Baobab Oil globally. Reliable supply from Ghana."}'::jsonb
+  '{"site_title": "Africma's & Dakeb Farm LTD | Premium Agricultural Exporter Africa", "site_description": "Exporting Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean, and Baobab Oil globally. Reliable supply from across Africa."}'::jsonb
 );
 
 -- 2. Products & Specs
@@ -27,7 +27,7 @@ begin
     'Unrefined (Grade A) Shea Butter',
     'unrefined-shea-butter-grade-a',
     'Premium raw, unrefined Shea Butter extracted from top-quality nuts. High moisturizing properties, ideal for cosmetics and food industries.',
-    'Our Grade A Unrefined Shea Butter is traditionally processed to retain all natural vitamins (A, E, F) and healing properties. Sourced directly from women cooperatives in Northern Ghana, ensuring fair trade and consistent quality. It has a rich nutty aroma and a creamy texture, perfect for skincare formulations, hair products, and confectionery usage.',
+    'Our Grade A Unrefined Shea Butter is traditionally processed to retain all natural vitamins (A, E, F) and healing properties. Sourced directly from women cooperatives across Africa, ensuring fair trade and consistent quality. It has a rich nutty aroma and a creamy texture, perfect for skincare formulations, hair products, and confectionery usage.',
     true,
     true
   ) returning id into v_shea_butter_id;
@@ -38,7 +38,7 @@ begin
     'Grade A (Unrefined/Raw)',
     '< 1%',
     '100% Pure, Free from impurities',
-    'Ghana',
+    'Africa',
     ARRAY['25kg Cartons', '50kg Drums', 'Bulk options available'],
     '100 kg',
     '24 Months',
@@ -64,7 +64,7 @@ begin
     'Refined / Fractionated',
     '< 0.5%',
     '100% Pure',
-    'Ghana',
+    'Africa',
     ARRAY['20L Jerrycans', '200L Drums', 'IBC Totes'],
     '200 Liters',
     '18 Months',
@@ -90,7 +90,7 @@ begin
     'Grade 1 (Non-GMO)',
     '< 12%',
     '99% Clean',
-    'Ghana',
+    'Africa',
     ARRAY['50kg PP Bags', '100kg Jute Bags', 'Bulk Container Liner'],
     '20 Metric Tons (1 Container)',
     '12 Months',
@@ -116,7 +116,7 @@ begin
     'Cold Pressed / Virgin',
     '< 0.2%',
     '100% Pure',
-    'Ghana',
+    'Africa',
     ARRAY['5L Gallons', '25L Drums', '200L Drums'],
     '25 Liters',
     '24 Months',
@@ -134,7 +134,7 @@ values (
   'home',
   'hero',
   '{
-    "heading": "Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean & Baobab Oil — Export-Ready Supply From Ghana",
+    "heading": "Grade A Unrefined Shea Butter, Shea Oil, Premium Soybean & Baobab Oil — Export-Ready Supply From Africa",
     "subheading": "Your trusted partner for high-quality agricultural ingredients. We ensure consistent supply, rigorous quality control, and seamless global logistics.",
     "cta_primary": "Request a Quote",
     "cta_secondary": "Download Specs"
@@ -147,9 +147,9 @@ values (
   'about',
   'company_profile',
   '{
-    "mission": "To bridge the gap between Ghanaian local farmers and the global market by providing premium quality agricultural products while ensuring fair trade and sustainable practices.",
+    "mission": "To bridge the gap between African local farmers and the global market by providing premium quality agricultural products while ensuring fair trade and sustainable practices.",
     "vision": "To be the leading exporter of indigenous African agricultural products, recognized for quality, reliability, and integrity.",
-    "story": "Founded in Accra, Africma’s & Dakeb Farm LTD started with a vision to share the richness of Ghana’s soil with the world. We work directly with farming communities to source the finest Shea nuts, Soybeans, and Baobab seeds. Our processing facilities adhere to strict hygiene and quality standards to ensure that every shipment meets international export requirements."
+    "story": "Founded in Accra, Ghana, Africma's & Dakeb Farm LTD started with a vision to share the richness of Africa's soil with the world. We work directly with farming communities across the continent to source the finest Shea nuts, Soybeans, and Baobab seeds. Our processing facilities adhere to strict hygiene and quality standards to ensure that every shipment meets international export requirements."
   }'::jsonb
 );
 
@@ -186,9 +186,9 @@ values (
 insert into blog_posts (title, slug, excerpt, content, tags, is_published, published_at)
 values 
 (
-  'How to Choose a Reliable Unrefined Shea Butter Supplier in Ghana',
+  'How to Choose a Reliable Unrefined Shea Butter Supplier in Africa',
   'how-to-choose-reliable-shea-butter-supplier',
-  'Sourcing Shea Butter from Ghana? Here are the key factors to consider to ensure you get Grade A quality and consistent supply.',
+  'Sourcing Shea Butter from Africa? Here are the key factors to consider to ensure you get Grade A quality and consistent supply.',
   '<h2>Understanding Shea Butter Grades</h2><p>Not all Shea Butter is created equal. Grade A (Unrefined) retains the most nutrients...</p><h2>Verification and Compliance</h2><p>Always ask for a Certificate of Analysis (COA) and verify the origin...</p>',
   ARRAY['Sourcing Guide', 'Shea Butter', 'Quality Control'],
   false,

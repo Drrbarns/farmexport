@@ -52,7 +52,7 @@ export default async function ProductsPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed"
             >
-              Grade A, unrefined agricultural products sourced directly from Ghanaian farmers. Export-ready with full documentation support.
+              Grade A, unrefined agricultural products sourced directly from African farmers. Export-ready with full documentation support.
             </motion.p>
           </div>
         </Container>

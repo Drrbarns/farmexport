@@ -15,7 +15,7 @@ export function Footer() {
               Africma's & <span className="text-accent">Dakeb Farm</span>
             </h3>
             <p className="text-slate-400 leading-relaxed">
-              Your trusted partner for premium Grade A Unrefined Shea Butter, Shea Oil, and agricultural exports from Ghana to the world. Sustainable, ethical, and reliable.
+              Your trusted partner for premium Grade A Unrefined Shea Butter, Shea Oil, and agricultural exports from Africa to the world. Sustainable, ethical, and reliable.
             </p>
             <div className="flex gap-4">
               <Button size="icon" variant="ghost" className="hover:text-primary hover:bg-white/5">
