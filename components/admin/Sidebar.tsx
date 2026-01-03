@@ -61,7 +61,7 @@ export function Sidebar() {
 
   const renderNavItems = (items: typeof sidebarItems) => {
     return items.map((item, index) => {
-      if ('section' in item) {
+      if ('section' in item && item.items) {
         // Render section with nested items
         return (
           <div key={item.section} className="space-y-1">
@@ -87,19 +87,23 @@ export function Sidebar() {
       }
       
       // Render regular item
-      return (
-        <Link
-          key={item.href}
-          href={item.href}
-          className={cn(
-            "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-slate-200",
-            pathname === item.href ? "bg-slate-200 text-slate-900" : "text-slate-500"
-          )}
-        >
-          <item.icon className="h-4 w-4" />
-          {item.label}
-        </Link>
-      )
+      if ('href' in item) {
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-slate-200",
+              pathname === item.href ? "bg-slate-200 text-slate-900" : "text-slate-500"
+            )}
+          >
+            <item.icon className="h-4 w-4" />
+            {item.label}
+          </Link>
+        )
+      }
+      
+      return null
     })
   }
 
