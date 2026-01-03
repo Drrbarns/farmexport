@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { submitRFQ } from '@/actions/submitRFQ'
+import { submitRFQ } from '@/actions/rfq'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -79,13 +79,28 @@ export function RFQForm({ products }: { products: any[] }) {
   const handleSubmit = async () => {
     setLoading(true)
     try {
-      const result = await submitRFQ(formData)
+      // Transform products to include name from selected product
+      const productsWithNames = formData.products.map(row => {
+        const product = products.find(p => p.id === row.productId)
+        return {
+          id: row.productId,
+          name: product?.name || 'Unknown',
+          qty: row.qty,
+          packaging: row.packaging,
+        }
+      })
+
+      const result = await submitRFQ({
+        ...formData,
+        products: productsWithNames,
+      })
+      
       if (result.success) {
         setSubmitted(true)
         setRfqNo(result.rfqNo!)
         toast.success('RFQ Submitted Successfully!')
       } else {
-        toast.error(result.message)
+        toast.error(result.error || 'Failed to submit RFQ')
       }
     } catch (error) {
       toast.error('Something went wrong')
