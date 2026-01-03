@@ -8,9 +8,29 @@ export async function middleware(request: NextRequest) {
     },
   })
 
+  // Skip middleware for public routes if Supabase is not configured
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  const isSupabaseConfigured = 
+    supabaseUrl && 
+    supabaseKey && 
+    supabaseUrl !== 'https://example.supabase.co' && 
+    supabaseKey !== 'public-anon-key'
+
+  // If Supabase is not configured, only allow public routes
+  if (!isSupabaseConfigured) {
+    // Block admin routes when Supabase is not configured
+    if (request.nextUrl.pathname.startsWith('/admin')) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+    // Allow all other routes
+    return response
+  }
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl!,
+    supabaseKey!,
     {
       cookies: {
         get(name: string) {
