@@ -8,16 +8,26 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { toast } from 'sonner'
-import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, Package, User, Truck, FileCheck } from 'lucide-react'
+import { Loader2, CheckCircle2, ChevronRight, ChevronLeft, Package, User, Truck, FileCheck, Info } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Badge } from '@/components/ui/badge'
 
 const steps = [
-  { label: 'Buyer Details', icon: User },
-  { label: 'Products', icon: Package },
-  { label: 'Logistics', icon: Truck },
-  { label: 'Compliance', icon: FileCheck }
+  { label: 'Buyer Details', icon: User, description: 'Tell us about your business' },
+  { label: 'Product Selection', icon: Package, description: 'What do you need?' },
+  { label: 'Logistics', icon: Truck, description: 'Shipping & Terms' },
+  { label: 'Compliance', icon: FileCheck, description: 'Certifications & documentation' }
+]
+
+const productImages = [
+  '/images/shea-butter.png',
+  '/images/cashew-nut.png',
+  '/images/soybean.png',
+  '/images/shea-oil.png',
 ]
 
 export function RFQForm({ products }: { products: any[] }) {
@@ -65,11 +75,9 @@ export function RFQForm({ products }: { products: any[] }) {
       }
     }
     if (currentStep === 1) {
-       if (formData.products.length === 0) {
-          // If empty, maybe add one empty row or prompt?
-          // Let's add a row if empty
-          if (formData.products.length === 0) addProductRow()
-       }
+      if (formData.products.length === 0) {
+        if (formData.products.length === 0) addProductRow()
+      }
     }
     setCurrentStep(prev => prev + 1)
   }
@@ -94,7 +102,7 @@ export function RFQForm({ products }: { products: any[] }) {
         ...formData,
         products: productsWithNames,
       })
-      
+
       if (result.success) {
         setSubmitted(true)
         setRfqNo(result.rfqNo!)
@@ -111,294 +119,449 @@ export function RFQForm({ products }: { products: any[] }) {
 
   if (submitted) {
     return (
-      <Card className="max-w-2xl mx-auto text-center py-16 shadow-2xl border-none rounded-3xl animate-in zoom-in-95 duration-500">
-        <CardContent className="space-y-8">
-          <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-green-600 animate-in fade-in zoom-in duration-700 delay-150">
-            <CheckCircle2 className="h-12 w-12" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900">Request Received!</h2>
-            <p className="text-xl text-muted-foreground mt-4 max-w-md mx-auto">
-              Thank you for your enquiry. Your RFQ Reference is <span className="font-mono font-bold text-primary bg-primary/10 px-2 py-1 rounded">{rfqNo}</span>.
-            </p>
-          </div>
-          <div className="p-6 bg-slate-50 rounded-2xl max-w-md mx-auto text-sm text-slate-600 border border-slate-100">
-            We have sent a confirmation email to <span className="font-semibold text-slate-900">{formData.email}</span>. Our sales team will review your requirements and send a proforma invoice within 24 hours.
-          </div>
-          <div className="flex justify-center gap-4 pt-4">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white" asChild>
-              <a href={`https://wa.me/233248209525?text=Hi, I just submitted RFQ ${rfqNo}. Can we discuss?`}>
-                Chat on WhatsApp
-              </a>
-            </Button>
-            <Button variant="outline" size="lg" onClick={() => window.location.reload()}>
-              Submit Another RFQ
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="flex items-center justify-center py-20">
+        <Card className="max-w-2xl w-full text-center p-8 shadow-2xl border-none rounded-3xl animate-in zoom-in-95 duration-500 bg-white">
+          <CardContent className="space-y-8 pt-8">
+            <div className="mx-auto w-24 h-24 bg-green-100/50 rounded-full flex items-center justify-center text-green-600 animate-in fade-in zoom-in duration-700 delay-150 ring-8 ring-green-50">
+              <CheckCircle2 className="h-12 w-12" />
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Request Received!</h2>
+              <p className="text-xl text-muted-foreground max-w-md mx-auto">
+                Your Request for Quotation has been securely submitted.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-2 py-4">
+              <span className="text-sm font-medium text-slate-500 uppercase tracking-widest">Reference Number</span>
+              <code className="text-3xl font-mono font-bold text-primary bg-primary/5 px-6 py-2 rounded-xl border border-primary/10">{rfqNo}</code>
+            </div>
+
+            <div className="p-6 bg-slate-50 rounded-2xl max-w-lg mx-auto text-sm leading-relaxed text-slate-600 border border-slate-100">
+              We have sent a confirmation email to <span className="font-semibold text-slate-900">{formData.email}</span>.
+              Our export specialists will review your requirements and send a detailed proforma invoice within 24 hours.
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white gap-2 h-12 px-8 rounded-full shadow-lg shadow-green-600/20" asChild>
+                <a href={`https://wa.me/233248209525?text=Hi, I just submitted RFQ ${rfqNo}. Can we discuss?`}>
+                  Chat on WhatsApp <ChevronRight className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" onClick={() => window.location.reload()} className="h-12 px-8 rounded-full border-2">
+                Submit Another RFQ
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     )
   }
 
+  // Visual Content for Side Panel
+  const renderVisualContent = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <div className="h-full flex flex-col justify-end p-8 text-white z-10">
+            <div className="bg-black/30 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <User className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="font-bold text-lg">Verified Suppliers</h3>
+              </div>
+              <p className="text-white/80 text-sm leading-relaxed">
+                We work directly with vetted farmer cooperatives to ensure you get the best market rates without middlemen markup.
+              </p>
+            </div>
+          </div>
+        )
+      case 1:
+        return (
+          <div className="h-full flex flex-col p-8 z-10">
+            <div className="mt-auto grid grid-cols-2 gap-3">
+              {productImages.map((src, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative aspect-square rounded-xl overflow-hidden border border-white/20 shadow-lg bg-black/20"
+                >
+                  <Image src={src} alt="Product" fill className="object-cover" />
+                </motion.div>
+              ))}
+            </div>
+            <div className="mt-4 bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+              <p className="text-white text-xs font-medium text-center">Premium Grade A Specifications</p>
+            </div>
+          </div>
+        )
+      case 2:
+        return (
+          <div className="h-full flex flex-col justify-end p-8 text-white z-10">
+            <div className="bg-black/30 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <Truck className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="font-bold text-lg">Global Logistics</h3>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm text-white/80">
+                  <div className="h-1.5 w-1.5 rounded-full bg-green-400" /> Door-to-Door Delivery
+                </div>
+                <div className="flex items-center gap-2 text-sm text-white/80">
+                  <div className="h-1.5 w-1.5 rounded-full bg-green-400" /> CIF / FOB / EXW Support
+                </div>
+                <div className="flex items-center gap-2 text-sm text-white/80">
+                  <div className="h-1.5 w-1.5 rounded-full bg-green-400" /> Fast Lead Times
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      case 3:
+        return (
+          <div className="h-full flex flex-col justify-end p-8 text-white z-10">
+            <div className="bg-black/30 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <FileCheck className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="font-bold text-lg">Full Compliance</h3>
+              </div>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Every shipment includes Certificate of Origin, Phyto-sanitary Certificate, and Commercial Invoice.
+              </p>
+            </div>
+          </div>
+        )
+      default: return null
+    }
+  }
+
+  // Background Image function
+  const getBgImage = () => {
+    switch (currentStep) {
+      case 0: return '/images/hero-1.png'
+      case 1: return '/images/products-hero-bg.png' // or a subtle texture
+      case 2: return '/images/export-ready-hero-bg.png'
+      case 3: return '/images/contact-hero-bg.png'
+      default: return '/images/hero-1.png'
+    }
+  }
+
   return (
-    <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
-      {/* Steps Sidebar - Horizontal on mobile, vertical on desktop */}
-      <div className="lg:w-64 flex-shrink-0">
-        <div className="lg:sticky lg:top-24 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-slate-100">
-          <nav className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
+    <div className="flex flex-col lg:flex-row gap-8 min-h-[600px] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
+
+      {/* Visual Sidebar (Desktop) */}
+      <div className="hidden lg:block lg:w-[400px] relative overflow-hidden bg-slate-900 shrink-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0"
+          >
+            <div className="absolute inset-0 bg-black/40 z-10" />
+            <Image
+              src={getBgImage()}
+              alt="Background"
+              fill
+              className="object-cover opacity-80"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Animated Content Layer */}
+        <div className="absolute inset-0 z-20">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="h-full"
+            >
+              {renderVisualContent()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Form Area */}
+      <div className="flex-1 flex flex-col p-6 lg:p-10">
+
+        {/* Progress Nav */}
+        <div className="mb-8">
+          <nav className="flex items-center justify-between relative">
+            <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-100 -z-10 rounded-full" />
+            <div
+              className="absolute top-1/2 left-0 h-1 bg-primary -z-10 transition-all duration-500 rounded-full"
+              style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
+            />
+
             {steps.map((step, i) => (
-              <div 
-                key={i}
-                className={cn(
-                  "flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg transition-colors shrink-0 lg:shrink",
-                  currentStep === i ? "bg-primary text-white" : (currentStep > i ? "text-primary font-medium" : "text-slate-400")
-                )}
-              >
-                <step.icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">{step.label}</span>
-                {currentStep > i && <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 ml-auto hidden lg:block" />}
+              <div key={i} className="flex flex-col items-center gap-2 relative bg-white px-2">
+                <div
+                  className={cn(
+                    "h-10 w-10 rounded-full flex items-center justify-center border-2 transition-all duration-300",
+                    currentStep >= i
+                      ? "bg-primary border-primary text-white shadow-lg shadow-primary/20"
+                      : "bg-white border-slate-200 text-slate-300"
+                  )}
+                >
+                  <step.icon className="h-5 w-5" />
+                </div>
+                <span className={cn(
+                  "text-xs font-semibold absolute -bottom-6 w-32 text-center transition-colors duration-300",
+                  currentStep === i ? "text-slate-900" : "text-slate-400 opacity-0 sm:opacity-100"
+                )}>
+                  {step.label}
+                </span>
               </div>
             ))}
           </nav>
         </div>
-      </div>
 
-      {/* Form Content */}
-      <div className="flex-1">
-        <Card className="border-none shadow-xl rounded-xl sm:rounded-2xl overflow-hidden">
-          <div className="h-1.5 sm:h-2 bg-slate-100 w-full">
-            <div 
-              className="h-full bg-primary transition-all duration-500 ease-in-out" 
-              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-            />
+        <div className="flex-1 mt-6">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-slate-900">{steps[currentStep].label}</h2>
+            <p className="text-slate-500">{steps[currentStep].description}</p>
           </div>
-          <CardHeader className="pb-4 sm:pb-8 px-4 sm:px-6">
-             <CardTitle className="text-xl sm:text-2xl">{steps[currentStep].label}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6 sm:space-y-8 min-h-[350px] sm:min-h-[400px] px-4 sm:px-6">
-            
-            {currentStep === 0 && (
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 animate-in slide-in-from-right-8 duration-500">
-                <div className="space-y-2">
-                  <Label className="text-sm">Full Name *</Label>
-                  <Input 
-                    value={formData.full_name} 
-                    onChange={e => setFormData({...formData, full_name: e.target.value})} 
-                    className="h-11 sm:h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-sm">Company Name *</Label>
-                  <Input 
-                    value={formData.company_name} 
-                    onChange={e => setFormData({...formData, company_name: e.target.value})} 
-                    className="h-11 sm:h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-sm">Email Address *</Label>
-                  <Input 
-                    type="email" 
-                    value={formData.email} 
-                    onChange={e => setFormData({...formData, email: e.target.value})} 
-                    className="h-11 sm:h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-sm">Phone / WhatsApp</Label>
-                  <Input 
-                    value={formData.phone} 
-                    onChange={e => setFormData({...formData, phone: e.target.value})} 
-                    className="h-11 sm:h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                  />
-                </div>
-                <div className="space-y-2 sm:col-span-2">
-                  <Label className="text-sm">Role</Label>
-                  <Select onValueChange={val => setFormData({...formData, role: val})}>
-                    <SelectTrigger className="h-11 sm:h-12 bg-slate-50 border-slate-200"><SelectValue placeholder="Select Role" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="procurement">Procurement Manager</SelectItem>
-                      <SelectItem value="owner">Business Owner</SelectItem>
-                      <SelectItem value="agent">Agent / Broker</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            )}
 
-            {currentStep === 1 && (
-              <div className="space-y-6 animate-in slide-in-from-right-8 duration-500">
-                {formData.products.length === 0 && (
-                   <div className="text-center py-12 bg-slate-50 rounded-xl border border-dashed">
-                      <Package className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-                      <p className="text-slate-500 mb-4">No products added yet.</p>
-                      <Button onClick={addProductRow} variant="outline">Add First Product</Button>
-                   </div>
-                )}
-                
-                {formData.products.map((row, i) => (
-                  <div key={i} className="grid md:grid-cols-3 gap-4 p-6 border rounded-xl bg-slate-50/50 relative group hover:bg-white hover:shadow-md transition-all">
-                    <div className="space-y-2">
-                      <Label>Product</Label>
-                      <Select value={row.productId} onValueChange={val => updateProductRow(i, 'productId', val)}>
-                        <SelectTrigger className="bg-white"><SelectValue placeholder="Select Product" /></SelectTrigger>
-                        <SelectContent>
-                          {products.map(p => (
-                            <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Quantity (e.g. 5 Tons)</Label>
-                      <Input 
-                         value={row.qty} 
-                         onChange={e => updateProductRow(i, 'qty', e.target.value)} 
-                         className="bg-white"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Packaging Pref.</Label>
-                      <Input 
-                         value={row.packaging} 
-                         onChange={e => updateProductRow(i, 'packaging', e.target.value)} 
-                         placeholder="e.g. 25kg Cartons" 
-                         className="bg-white"
-                      />
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="absolute -top-3 -right-3 h-8 w-8 rounded-full bg-white shadow-sm border text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={() => {
-                        const newP = [...formData.products]
-                        newP.splice(i, 1)
-                        setFormData({...formData, products: newP})
-                      }}
-                    >
-                      <span className="sr-only">Remove</span>
-                      &times;
-                    </Button>
+          <Card className="border-none shadow-none p-0">
+            <CardContent className="p-0 space-y-6 min-h-[300px]">
+              {/* Step 0: Buyer Details */}
+              {currentStep === 0 && (
+                <div className="grid sm:grid-cols-2 gap-5 animate-in slide-in-from-right-4 duration-300">
+                  <div className="space-y-2">
+                    <Label>Full Name <span className="text-red-500">*</span></Label>
+                    <Input
+                      placeholder="John Doe"
+                      value={formData.full_name}
+                      onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                      className="h-12 border-slate-200 bg-slate-50 focus:bg-white transition-colors"
+                    />
                   </div>
-                ))}
-                
-                {formData.products.length > 0 && (
-                  <Button type="button" variant="outline" onClick={addProductRow} className="w-full border-dashed">
-                    + Add Another Product
+                  <div className="space-y-2">
+                    <Label>Company Name <span className="text-red-500">*</span></Label>
+                    <Input
+                      placeholder="Business Ltd."
+                      value={formData.company_name}
+                      onChange={e => setFormData({ ...formData, company_name: e.target.value })}
+                      className="h-12 border-slate-200 bg-slate-50 focus:bg-white transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Email Address <span className="text-red-500">*</span></Label>
+                    <Input
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      className="h-12 border-slate-200 bg-slate-50 focus:bg-white transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Phone / WhatsApp</Label>
+                    <Input
+                      placeholder="+123..."
+                      value={formData.phone}
+                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                      className="h-12 border-slate-200 bg-slate-50 focus:bg-white transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2 sm:col-span-2">
+                    <Label>Role</Label>
+                    <Select onValueChange={val => setFormData({ ...formData, role: val })}>
+                      <SelectTrigger className="h-12 border-slate-200 bg-slate-50"><SelectValue placeholder="Select your role" /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="procurement">Procurement Manager</SelectItem>
+                        <SelectItem value="owner">Business Owner</SelectItem>
+                        <SelectItem value="agent">Agent / Broker</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 1: Products */}
+              {currentStep === 1 && (
+                <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                  {formData.products.map((row, i) => (
+                    <div key={i} className="p-5 border border-slate-200 rounded-xl bg-slate-50/50 hover:bg-white hover:shadow-md transition-all relative group">
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <Label>Product</Label>
+                          <Select value={row.productId} onValueChange={val => updateProductRow(i, 'productId', val)}>
+                            <SelectTrigger className="bg-white h-11"><SelectValue placeholder="Select Product" /></SelectTrigger>
+                            <SelectContent>
+                              {products.map(p => (
+                                <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Quantity</Label>
+                          <Input
+                            value={row.qty}
+                            onChange={e => updateProductRow(i, 'qty', e.target.value)}
+                            placeholder="e.g. 10MT"
+                            className="bg-white h-11"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Packaging</Label>
+                          <Input
+                            value={row.packaging}
+                            onChange={e => updateProductRow(i, 'packaging', e.target.value)}
+                            placeholder="e.g. 50kg PP Bags"
+                            className="bg-white h-11"
+                          />
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => {
+                          const newP = [...formData.products]
+                          newP.splice(i, 1)
+                          setFormData({ ...formData, products: newP })
+                        }}
+                        className="absolute -top-3 -right-3 h-8 w-8 bg-white border rounded-full shadow-sm text-slate-400 hover:text-red-500 items-center justify-center flex opacity-0 group-hover:opacity-100 transition-opacity"
+                        title="Remove Item"
+                      >
+                        <span className="text-xl leading-none mb-1">&times;</span>
+                      </button>
+                    </div>
+                  ))}
+                  <Button type="button" variant="outline" onClick={addProductRow} className="w-full border-dashed border-2 py-6 text-slate-500 hover:text-primary hover:border-primary/50 hover:bg-primary/5">
+                    <Package className="mr-2 h-4 w-4" /> Add Another Product
                   </Button>
-                )}
-              </div>
-            )}
+                </div>
+              )}
 
-            {currentStep === 2 && (
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 animate-in slide-in-from-right-8 duration-500">
-                <div className="space-y-2">
-                  <Label className="text-sm">Destination Country *</Label>
-                  <Input 
-                    value={formData.destination_country} 
-                    onChange={e => setFormData({...formData, destination_country: e.target.value})} 
-                    className="h-11 sm:h-12 bg-slate-50 border-slate-200"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-sm">Target Timeline</Label>
-                  <Select onValueChange={val => setFormData({...formData, timeline: val})}>
-                    <SelectTrigger className="h-11 sm:h-12 bg-slate-50 border-slate-200"><SelectValue placeholder="Select Timeline" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="immediate">Immediate (ASAP)</SelectItem>
-                      <SelectItem value="1month">Within 1 Month</SelectItem>
-                      <SelectItem value="3months">Within 3 Months</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-3 sm:space-y-4 sm:col-span-2">
-                  <Label className="text-sm sm:text-base">Preferred Incoterms</Label>
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                    {['EXW', 'FOB', 'CIF'].map(term => (
-                       <label 
-                         key={term} 
-                         className={cn(
-                           "flex flex-col items-center justify-center p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all hover:bg-slate-50",
-                           formData.incoterm === term ? "border-primary bg-primary/5 text-primary" : "border-slate-100 text-slate-500"
-                         )}
-                       >
-                         <Checkbox 
-                           className="sr-only"
-                           checked={formData.incoterm === term} 
-                           onCheckedChange={() => setFormData({...formData, incoterm: term})} 
-                         />
-                         <span className="font-bold text-base sm:text-lg">{term}</span>
-                         <span className="text-[10px] sm:text-xs text-center mt-1 font-normal">
-                           {term === 'EXW' ? 'Ex Works' : (term === 'FOB' ? 'Free On Board' : 'Cost, Ins, Freight')}
-                         </span>
-                       </label>
-                    ))}
+              {/* Step 2: Logistics */}
+              {currentStep === 2 && (
+                <div className="grid sm:grid-cols-2 gap-6 animate-in slide-in-from-right-4 duration-300">
+                  <div className="space-y-2">
+                    <Label>Destination Country <span className="text-red-500">*</span></Label>
+                    <Input
+                      value={formData.destination_country}
+                      onChange={e => setFormData({ ...formData, destination_country: e.target.value })}
+                      className="h-12 border-slate-200 bg-slate-50 focus:bg-white"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Desired Timeline</Label>
+                    <Select onValueChange={val => setFormData({ ...formData, timeline: val })}>
+                      <SelectTrigger className="h-12 border-slate-200 bg-slate-50"><SelectValue placeholder="When do you need it?" /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="immediate">Immediate</SelectItem>
+                        <SelectItem value="1month">Next 30 Days</SelectItem>
+                        <SelectItem value="3months">Next Quarter</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="sm:col-span-2 space-y-3">
+                    <Label>Preferred Incoterms</Label>
+                    <div className="grid grid-cols-3 gap-4">
+                      {['EXW', 'FOB', 'CIF'].map(term => (
+                        <div
+                          key={term}
+                          onClick={() => setFormData({ ...formData, incoterm: term })}
+                          className={cn(
+                            "cursor-pointer rounded-xl border-2 p-4 text-center transition-all hover:border-primary/50",
+                            formData.incoterm === term
+                              ? "border-primary bg-primary/5 text-primary"
+                              : "border-slate-100 bg-slate-50 text-slate-500"
+                          )}
+                        >
+                          <div className="font-bold text-lg">{term}</div>
+                          <div className="text-[10px] uppercase font-medium mt-1 opacity-70">
+                            {term === 'EXW' ? 'Ex Works' : (term === 'FOB' ? 'Freight on Board' : 'Cost Ins Friction')}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {currentStep === 3 && (
-              <div className="space-y-6 animate-in slide-in-from-right-8 duration-500">
-                <div className="space-y-2">
-                  <Label>Intended Application / Industry</Label>
-                  <Input 
-                    placeholder="e.g. Cosmetic formulation for skin cream" 
-                    value={formData.intended_use} 
-                    onChange={e => setFormData({...formData, intended_use: e.target.value})} 
-                    className="h-12 bg-slate-50 border-slate-200"
-                  />
-                </div>
-                <div className="flex items-center space-x-3 border p-6 rounded-xl bg-slate-50/50">
-                   <Checkbox 
-                     id="coa" 
-                     className="h-6 w-6"
-                     checked={formData.require_coa} 
-                     onCheckedChange={(c) => setFormData({...formData, require_coa: c as boolean})} 
-                   />
-                   <div className="space-y-1">
-                     <label htmlFor="coa" className="font-semibold leading-none cursor-pointer">
-                       Require Certificate of Analysis (COA) / MSDS?
-                     </label>
-                     <p className="text-sm text-slate-500">We will attach standard quality specs to your quote.</p>
-                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label>Additional Notes</Label>
-                  <Textarea 
-                    placeholder="Any specific requirements regarding packaging, labeling, or shipping?" 
-                    value={formData.notes} 
-                    onChange={e => setFormData({...formData, notes: e.target.value})} 
-                    className="min-h-[120px] bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                  />
-                </div>
-              </div>
-            )}
+              {/* Step 3: Compliance & Notes */}
+              {currentStep === 3 && (
+                <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                  <div className="p-4 border border-blue-100 bg-blue-50/50 rounded-xl flex gap-3 text-sm text-blue-700">
+                    <Info className="h-5 w-5 shrink-0" />
+                    <p>We provide standard documentation including Commercial Invoice, Packing List, and Phyto Certificate/COA.</p>
+                  </div>
 
-          </CardContent>
-          <CardFooter className="flex justify-between p-4 sm:p-8 bg-slate-50/50 border-t gap-3">
-            <Button 
-               variant="ghost" 
-               onClick={handleBack} 
-               disabled={currentStep === 0}
-               className="text-slate-500 hover:text-slate-900 px-3 sm:px-4"
-            >
-               <ChevronLeft className="mr-1 sm:mr-2 h-4 w-4" /> <span className="hidden sm:inline">Back</span>
+                  <div className="space-y-2">
+                    <Label>Specific Industry/Application</Label>
+                    <Input
+                      placeholder="e.g. Skin care manuf., Animal feed, etc."
+                      value={formData.intended_use}
+                      onChange={e => setFormData({ ...formData, intended_use: e.target.value })}
+                      className="h-12 border-slate-200 bg-slate-50"
+                    />
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer" onClick={() => setFormData({ ...formData, require_coa: !formData.require_coa })}>
+                    <Checkbox
+                      id="coa"
+                      checked={formData.require_coa}
+                      onCheckedChange={(c) => setFormData({ ...formData, require_coa: c as boolean })}
+                      className="mt-1"
+                    />
+                    <div className="space-y-1">
+                      <label htmlFor="coa" className="font-semibold cursor-pointer">Require Specialized COA / MSDS?</label>
+                      <p className="text-sm text-slate-500">Check this if your import authority requires specific additional testing.</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Additional Notes</Label>
+                    <Textarea
+                      placeholder="Tell us more about your target price, packaging requirements, or any other details..."
+                      value={formData.notes}
+                      onChange={e => setFormData({ ...formData, notes: e.target.value })}
+                      className="min-h-[100px] border-slate-200 bg-slate-50"
+                    />
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="flex justify-between items-center pt-8 border-t border-slate-100 mt-auto">
+          <Button
+            variant="ghost"
+            onClick={handleBack}
+            disabled={currentStep === 0}
+            className="text-slate-500 hover:text-slate-900"
+          >
+            <ChevronLeft className="mr-2 h-4 w-4" /> Back
+          </Button>
+
+          {currentStep === steps.length - 1 ? (
+            <Button onClick={handleSubmit} disabled={loading} size="lg" className="px-8 bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-primary/20">
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Submit Quote Request
             </Button>
-            
-            {currentStep === steps.length - 1 ? (
-              <Button onClick={handleSubmit} disabled={loading} size="lg" className="px-4 sm:px-8 shadow-lg hover:shadow-xl transition-shadow bg-primary text-white text-sm sm:text-base">
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Submit RFQ
-              </Button>
-            ) : (
-              <Button onClick={handleNext} size="lg" className="px-4 sm:px-8 text-sm sm:text-base">
-                Next <span className="hidden sm:inline">Step</span> <ChevronRight className="ml-1 sm:ml-2 h-4 w-4" />
-              </Button>
-            )}
-          </CardFooter>
-        </Card>
+          ) : (
+            <Button onClick={handleNext} size="lg" className="px-8 bg-slate-900 text-white hover:bg-slate-800">
+              Continue <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          )}
+        </div>
+
       </div>
     </div>
   )

@@ -89,8 +89,8 @@ export default function ContactPage() {
                 <ContactInfoItem
                   icon={Mail}
                   title="Email Us"
-                  details="export@africmadakeb.com"
-                  link="mailto:export@africmadakeb.com"
+                  details="info@africmasdakebfarmltd.com"
+                  link="mailto:info@africmasdakebfarmltd.com"
                   linkText="Send an Email"
                 />
 

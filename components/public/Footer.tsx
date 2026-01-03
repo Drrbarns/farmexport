@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="bg-[var(--hero-bg)] text-slate-200">
       <div className="container py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          
+
           {/* Company Info */}
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold text-white tracking-tight">
@@ -68,20 +68,20 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-accent shrink-0" />
-                <span>export@africmadakeb.com</span>
+                <span>info@africmasdakebfarmltd.com</span>
               </li>
             </ul>
-            
+
             <div className="pt-6 border-t border-slate-800">
-               <p className="text-sm font-medium text-white mb-2">Subscribe to Export Updates</p>
-               <div className="flex flex-col sm:flex-row gap-2">
-                 <Input placeholder="Email address" className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-primary flex-1" />
-                 <Button className="bg-primary text-white hover:bg-primary/90 w-full sm:w-auto">Join</Button>
-               </div>
+              <p className="text-sm font-medium text-white mb-2">Subscribe to Export Updates</p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Input placeholder="Email address" className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-primary flex-1" />
+                <Button className="bg-primary text-white hover:bg-primary/90 w-full sm:w-auto">Join</Button>
+              </div>
             </div>
           </div>
         </div>
-        
+
         <div className="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>© {new Date().getFullYear()} Africma’s & Dakeb Farm LTD. All rights reserved.</p>
           <div className="flex gap-6">

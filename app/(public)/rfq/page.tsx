@@ -52,17 +52,16 @@ export default async function RFQPage({ searchParams }: { searchParams: { produc
         </Container>
       </section>
 
-      <Section spacing="loose" className="bg-background">
-        <Container size="narrow">
+      <Section spacing="loose" className="bg-slate-50 relative -mt-20 pt-20 pb-20 z-20">
+        <Container>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-card p-6 md:p-10 rounded-2xl shadow-lg border"
           >
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl font-semibold mb-2">Detailed Specifications</h2>
-              <p className="text-muted-foreground">Please fill out the form below with your order details.</p>
+            <div className="mb-10 text-center max-w-2xl mx-auto">
+              <h2 className="text-3xl font-bold mb-3 text-slate-900">Get A Competitive Quote</h2>
+              <p className="text-lg text-slate-600">Complete the form below to receive a detailed proforma invoice including shipping to your destination.</p>
             </div>
             <RFQForm products={products || []} />
           </motion.div>
