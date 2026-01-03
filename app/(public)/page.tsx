@@ -1,9 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight, Download, Globe2, FileCheck, Package, Beaker, ChefHat, Pill, Leaf } from 'lucide-react'
+import { ArrowRight, Globe2, FileCheck, Package, Beaker, ChefHat, Pill } from 'lucide-react'
 import { Section, SectionHeader } from '@/components/layout/Section'
-import { Container } from '@/components/layout/Container'
 import { TrustBar } from '@/components/marketing/TrustBar'
 import { IndustryCard } from '@/components/marketing/IndustryCard'
 import { Steps } from '@/components/marketing/Steps'
@@ -13,17 +12,11 @@ import { LatestInsights } from '@/components/marketing/LatestInsights'
 import { FAQSection } from '@/components/marketing/FAQSection'
 import { Badge } from '@/components/ui/badge'
 import { HeroSlider } from '@/components/marketing/HeroSlider'
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/shared/Animations'
 
 export const revalidate = 0
 
 export default async function Home() {
-  let hero = {
-    heading: 'Export-Ready Shea Butter, Shea Oil, Soybean & Baobab Oil Supply From Ghana',
-    subheading: 'Raw, unrefined, low moisture content, free from impurities. Consistent supply with full export documentation support.',
-    cta_primary: 'Request a Quote',
-    cta_secondary: 'Download Product Specs'
-  }
-
   let products: any[] = [
     {
       id: '1',
@@ -56,26 +49,12 @@ export default async function Home() {
   ]
 
   try {
-    // Check if Supabase is properly configured before making queries
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     
     if (supabaseUrl && supabaseUrl !== 'https://example.supabase.co' && supabaseKey && supabaseKey !== 'public-anon-key') {
       const supabase = await createClient()
 
-      // Fetch Hero Content
-      const { data: heroData, error: heroError } = await supabase
-        .from('page_sections')
-        .select('content')
-        .eq('page_key', 'home')
-        .eq('title', 'hero')
-        .single()
-
-      if (!heroError && heroData?.content) {
-        hero = { ...hero, ...(heroData.content as any) }
-      }
-
-      // Fetch Featured Products
       const { data: productsData, error: productsError } = await supabase
         .from('products')
         .select('*, spec_sheets(file_url)')
@@ -88,7 +67,6 @@ export default async function Home() {
       }
     }
   } catch (error) {
-    // Silently fail if Supabase is not configured - use default values
     console.error('Supabase connection error:', error)
   }
 
@@ -98,67 +76,85 @@ export default async function Home() {
 
       {/* Products We Supply */}
       <Section spacing="default" className="py-12">
-        <SectionHeader
-          title="Products We Supply"
-          description="Grade A, raw, unrefined agricultural products sourced directly from our network of 500+ farmers in Ghana."
-          className="mb-8"
-        />
+        <FadeIn>
+          <SectionHeader
+            title="Products We Supply"
+            description="Grade A, raw, unrefined agricultural products sourced directly from our network of 500+ farmers in Ghana."
+            className="mb-8"
+          />
+        </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {products?.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <StaggerItem key={product.id}>
+              <ProductCard product={product} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
-        <div className="text-center mt-10">
-          <Button variant="outline" size="lg" asChild className="h-11 px-8 text-sm font-semibold border-slate-300">
+        <FadeIn delay={0.4} className="text-center mt-10">
+          <Button variant="outline" size="lg" asChild className="h-11 px-8 text-sm font-semibold border-slate-300 hover:border-primary hover:text-primary transition-all duration-300">
             <Link href="/products">
               View Full Catalogue <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-        </div>
+        </FadeIn>
       </Section>
 
       {/* Industries & Applications */}
       <Section background="muted" spacing="default" className="py-12">
-        <SectionHeader
-          title="Industries & Applications"
-          description="Our products serve diverse global markets with stringent quality requirements."
-          className="mb-8"
-        />
+        <FadeIn>
+          <SectionHeader
+            title="Industries & Applications"
+            description="Our products serve diverse global markets with stringent quality requirements."
+            className="mb-8"
+          />
+        </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          <IndustryCard
-            title="Cosmetics & Skincare"
-            desc="Natural ingredients for premium beauty formulations"
-            icon={Beaker}
-          />
-          <IndustryCard
-            title="Haircare Products"
-            desc="Nourishing oils and butters for hair treatments"
-            icon={Package}
-          />
-          <IndustryCard
-            title="Food Manufacturing"
-            desc="Food-grade ingredients for global food processors"
-            icon={ChefHat}
-          />
-          <IndustryCard
-            title="Bulk Wholesalers"
-            desc="Reliable supply for distributors and trading partners"
-            icon={Pill}
-          />
-        </div>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <StaggerItem>
+            <IndustryCard
+              title="Cosmetics & Skincare"
+              desc="Natural ingredients for premium beauty formulations"
+              icon={Beaker}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <IndustryCard
+              title="Haircare Products"
+              desc="Nourishing oils and butters for hair treatments"
+              icon={Package}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <IndustryCard
+              title="Food Manufacturing"
+              desc="Food-grade ingredients for global food processors"
+              icon={ChefHat}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <IndustryCard
+              title="Bulk Wholesalers"
+              desc="Reliable supply for distributors and trading partners"
+              icon={Pill}
+            />
+          </StaggerItem>
+        </StaggerContainer>
       </Section>
 
       {/* Quality & Compliance */}
       <Section spacing="default" className="py-12">
-        <SectionHeader
-          title="Quality & Compliance"
-          description="Every shipment meets international standards with full documentation and traceability."
-          className="mb-8"
-        />
-        <TrustBar />
+        <FadeIn>
+          <SectionHeader
+            title="Quality & Compliance"
+            description="Every shipment meets international standards with full documentation and traceability."
+            className="mb-8"
+          />
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <TrustBar />
+        </FadeIn>
       </Section>
 
       {/* Export & Logistics Readiness */}
@@ -168,7 +164,7 @@ export default async function Home() {
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-primary/10 -skew-x-12 -translate-x-1/2 blur-3xl" />
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
-          <div className="space-y-6 text-white order-2 lg:order-1">
+          <FadeIn direction="right" className="space-y-6 text-white order-2 lg:order-1">
             <div className="space-y-3">
               <Badge variant="outline" className="text-primary-foreground border-primary-foreground/20 px-3 py-1 text-xs uppercase tracking-wider font-semibold">
                 Global Supply Chain
@@ -189,7 +185,7 @@ export default async function Home() {
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {['EXW', 'FOB', 'CIF'].map((term) => (
-                    <Badge key={term} variant="secondary" className="px-3 py-1 bg-white/10 hover:bg-white/20 text-white border border-white/10 font-mono text-xs">
+                    <Badge key={term} variant="secondary" className="px-3 py-1 bg-white/10 hover:bg-white/20 text-white border border-white/10 font-mono text-xs cursor-default transition-colors">
                       {term}
                     </Badge>
                   ))}
@@ -231,21 +227,21 @@ export default async function Home() {
             </div>
 
             <div className="pt-2">
-              <Button size="lg" className="bg-white text-slate-900 hover:bg-white/90 font-semibold h-10 px-6 text-sm shadow-lg shadow-white/10" asChild>
+              <Button size="lg" className="bg-white text-slate-900 hover:bg-white/90 font-semibold h-10 px-6 text-sm shadow-lg shadow-white/10 transition-transform hover:scale-105" asChild>
                 <Link href="/export-readiness">
                   Talk to Export Team <ArrowRight className="ml-2 h-3 w-3" />
                 </Link>
               </Button>
             </div>
-          </div>
+          </FadeIn>
 
-          <div className="relative order-1 lg:order-2">
+          <FadeIn direction="left" className="relative order-1 lg:order-2">
             <div className="relative aspect-video lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
               <img
                 src="/images/hero-2.png"
                 alt="Global Logistics Network"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               
               {/* Floating Stat Card */}
@@ -264,7 +260,7 @@ export default async function Home() {
             
             {/* Decorative dots grid */}
             <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-[url('/images/dots.svg')] opacity-20 hidden lg:block" />
-          </div>
+          </FadeIn>
         </div>
       </Section>
 
@@ -275,51 +271,65 @@ export default async function Home() {
              style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
         />
         
-        <SectionHeader
-          title="How Bulk Orders Work"
-          description="A transparent, straightforward process from inquiry to delivery."
-          className="mb-12 relative z-10"
-        />
+        <FadeIn>
+          <SectionHeader
+            title="How Bulk Orders Work"
+            description="A transparent, straightforward process from inquiry to delivery."
+            className="mb-12 relative z-10"
+          />
+        </FadeIn>
         <div className="relative z-10">
           <Steps />
         </div>
-        <div className="text-center mt-12 relative z-10">
-          <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 h-11 px-8 text-sm font-semibold" asChild>
+        <FadeIn delay={0.4} className="text-center mt-12 relative z-10">
+          <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 h-11 px-8 text-sm font-semibold transition-transform hover:scale-105" asChild>
             <Link href="/rfq">
               Start Your RFQ <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-        </div>
+        </FadeIn>
       </Section>
 
       {/* Gallery Preview */}
       <Section spacing="default" className="py-16">
-        <SectionHeader
-          title="From Farm to Port"
-          description="See our operations in action. We maintain transparency at every stage of the supply chain."
-          className="mb-12"
-        />
-        <GalleryPreview />
+        <FadeIn>
+          <SectionHeader
+            title="From Farm to Port"
+            description="See our operations in action. We maintain transparency at every stage of the supply chain."
+            className="mb-12"
+          />
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <GalleryPreview />
+        </FadeIn>
       </Section>
 
       {/* Insights Preview */}
       <Section background="muted" spacing="default" className="py-12">
-        <SectionHeader
-          title="Market Insights"
-          description="Latest news, trends, and sourcing guides for agricultural commodities."
-          className="mb-8"
-        />
-        <LatestInsights />
+        <FadeIn>
+          <SectionHeader
+            title="Market Insights"
+            description="Latest news, trends, and sourcing guides for agricultural commodities."
+            className="mb-8"
+          />
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <LatestInsights />
+        </FadeIn>
       </Section>
 
       {/* FAQ */}
       <Section spacing="default" className="py-12">
-        <SectionHeader
-          title="Frequently Asked Questions"
-          description="Common questions about sourcing, shipping, and quality assurance."
-          className="mb-8"
-        />
-        <FAQSection />
+        <FadeIn>
+          <SectionHeader
+            title="Frequently Asked Questions"
+            description="Common questions about sourcing, shipping, and quality assurance."
+            className="mb-8"
+          />
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <FAQSection />
+        </FadeIn>
       </Section>
     </div>
   )
