@@ -32,7 +32,8 @@ BEGIN
     updated_at = now()
   RETURNING id INTO v_shea_butter_id;
 
-  -- Update or insert specs for Shea Butter
+  -- Delete existing specs and insert new ones
+  DELETE FROM product_specs WHERE product_id = v_shea_butter_id;
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_shea_butter_id,
@@ -46,20 +47,7 @@ BEGIN
     '1-2 Weeks',
     ARRAY['Certificate of Analysis (COA)', 'MSDS', 'Phytosanitary Certificate', 'Certificate of Origin', 'Halal/Kosher (upon request)'],
     ARRAY['Cosmetics & Skincare', 'Haircare Products', 'Soaps & Balms', 'Food/Confectionery', 'Pharmaceutical Excipient']
-  )
-  ON CONFLICT (product_id) 
-  DO UPDATE SET
-    grade_type = EXCLUDED.grade_type,
-    moisture = EXCLUDED.moisture,
-    purity = EXCLUDED.purity,
-    origin = EXCLUDED.origin,
-    packaging_options = EXCLUDED.packaging_options,
-    moq = EXCLUDED.moq,
-    shelf_life = EXCLUDED.shelf_life,
-    lead_time = EXCLUDED.lead_time,
-    documentation = EXCLUDED.documentation,
-    applications = EXCLUDED.applications,
-    updated_at = now();
+  );
 
   -- 2. Premium Shea Oil
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -81,6 +69,7 @@ BEGIN
     updated_at = now()
   RETURNING id INTO v_shea_oil_id;
 
+  DELETE FROM product_specs WHERE product_id = v_shea_oil_id;
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_shea_oil_id,
@@ -94,20 +83,7 @@ BEGIN
     '2 Weeks',
     ARRAY['COA', 'MSDS', 'Certificate of Origin', 'Allergen Statement'],
     ARRAY['Massage Oils', 'Body Lotions', 'Hair Serums', 'Aromatherapy Base', 'Lip Care Products']
-  )
-  ON CONFLICT (product_id) 
-  DO UPDATE SET
-    grade_type = EXCLUDED.grade_type,
-    moisture = EXCLUDED.moisture,
-    purity = EXCLUDED.purity,
-    origin = EXCLUDED.origin,
-    packaging_options = EXCLUDED.packaging_options,
-    moq = EXCLUDED.moq,
-    shelf_life = EXCLUDED.shelf_life,
-    lead_time = EXCLUDED.lead_time,
-    documentation = EXCLUDED.documentation,
-    applications = EXCLUDED.applications,
-    updated_at = now();
+  );
 
   -- 3. Premium Grade Soybean
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -129,6 +105,7 @@ BEGIN
     updated_at = now()
   RETURNING id INTO v_soybean_id;
 
+  DELETE FROM product_specs WHERE product_id = v_soybean_id;
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_soybean_id,
@@ -142,20 +119,7 @@ BEGIN
     '2-3 Weeks',
     ARRAY['Phytosanitary Certificate', 'Fumigation Certificate', 'Certificate of Origin', 'Quality Certificate', 'Non-GMO Declaration'],
     ARRAY['Food Processing (Soy Milk/Tofu)', 'Oil Extraction', 'Animal Feed', 'Protein Concentrate']
-  )
-  ON CONFLICT (product_id) 
-  DO UPDATE SET
-    grade_type = EXCLUDED.grade_type,
-    moisture = EXCLUDED.moisture,
-    purity = EXCLUDED.purity,
-    origin = EXCLUDED.origin,
-    packaging_options = EXCLUDED.packaging_options,
-    moq = EXCLUDED.moq,
-    shelf_life = EXCLUDED.shelf_life,
-    lead_time = EXCLUDED.lead_time,
-    documentation = EXCLUDED.documentation,
-    applications = EXCLUDED.applications,
-    updated_at = now();
+  );
 
   -- 4. Cold-Pressed Baobab Oil
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -177,6 +141,7 @@ BEGIN
     updated_at = now()
   RETURNING id INTO v_baobab_oil_id;
 
+  DELETE FROM product_specs WHERE product_id = v_baobab_oil_id;
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_baobab_oil_id,
@@ -190,20 +155,7 @@ BEGIN
     '1-2 Weeks',
     ARRAY['COA', 'MSDS', 'Organic Certificate (available)', 'Certificate of Origin'],
     ARRAY['Anti-aging Creams', 'Face Serums', 'Body Oils', 'Hair Conditioning Treatments', 'Nail & Cuticle Care']
-  )
-  ON CONFLICT (product_id) 
-  DO UPDATE SET
-    grade_type = EXCLUDED.grade_type,
-    moisture = EXCLUDED.moisture,
-    purity = EXCLUDED.purity,
-    origin = EXCLUDED.origin,
-    packaging_options = EXCLUDED.packaging_options,
-    moq = EXCLUDED.moq,
-    shelf_life = EXCLUDED.shelf_life,
-    lead_time = EXCLUDED.lead_time,
-    documentation = EXCLUDED.documentation,
-    applications = EXCLUDED.applications,
-    updated_at = now();
+  );
 
   -- 5. Raw Cashew Nuts (RCN) - NEW PRODUCT
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -225,6 +177,7 @@ BEGIN
     updated_at = now()
   RETURNING id INTO v_cashew_id;
 
+  DELETE FROM product_specs WHERE product_id = v_cashew_id;
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_cashew_id,
@@ -238,20 +191,7 @@ BEGIN
     '3-4 Weeks (Seasonal availability)',
     ARRAY['Certificate of Origin', 'Phytosanitary Certificate', 'Fumigation Certificate', 'Quality Certificate', 'Weight Certificate'],
     ARRAY['Cashew Processing Plants', 'Kernel Extraction', 'Cashew Nut Shell Liquid (CNSL) Production']
-  )
-  ON CONFLICT (product_id) 
-  DO UPDATE SET
-    grade_type = EXCLUDED.grade_type,
-    moisture = EXCLUDED.moisture,
-    purity = EXCLUDED.purity,
-    origin = EXCLUDED.origin,
-    packaging_options = EXCLUDED.packaging_options,
-    moq = EXCLUDED.moq,
-    shelf_life = EXCLUDED.shelf_life,
-    lead_time = EXCLUDED.lead_time,
-    documentation = EXCLUDED.documentation,
-    applications = EXCLUDED.applications,
-    updated_at = now();
+  );
 
   -- 6. Dried Ginger Root - NEW PRODUCT
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -273,6 +213,7 @@ BEGIN
     updated_at = now()
   RETURNING id INTO v_ginger_id;
 
+  DELETE FROM product_specs WHERE product_id = v_ginger_id;
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_ginger_id,
@@ -286,20 +227,7 @@ BEGIN
     '2 Weeks',
     ARRAY['Phytosanitary Certificate', 'Certificate of Origin', 'Fumigation Certificate', 'COA', 'Organic Certificate (if applicable)'],
     ARRAY['Spice Manufacturing', 'Food & Beverage Industry', 'Herbal Tea Blends', 'Health Supplements', 'Pharmaceutical Ingredients']
-  )
-  ON CONFLICT (product_id) 
-  DO UPDATE SET
-    grade_type = EXCLUDED.grade_type,
-    moisture = EXCLUDED.moisture,
-    purity = EXCLUDED.purity,
-    origin = EXCLUDED.origin,
-    packaging_options = EXCLUDED.packaging_options,
-    moq = EXCLUDED.moq,
-    shelf_life = EXCLUDED.shelf_life,
-    lead_time = EXCLUDED.lead_time,
-    documentation = EXCLUDED.documentation,
-    applications = EXCLUDED.applications,
-    updated_at = now();
+  );
 
 END $$;
 
