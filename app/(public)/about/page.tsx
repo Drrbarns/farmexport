@@ -78,7 +78,7 @@ export default async function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-4">
-                Est. 2020 • Accra, Ghana
+                Est. 2022 • Accra, Ghana
               </span>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
                 Cultivating Excellence, <br />
