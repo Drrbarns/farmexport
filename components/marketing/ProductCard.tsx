@@ -20,11 +20,16 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   // Determine image based on slug
   const imageSrc = (() => {
-    if (product.slug.includes('shea') && product.slug.includes('oil')) return 'shea-oil.png'
-    if (product.slug.includes('shea')) return 'shea-butter.png'
-    if (product.slug.includes('soy')) return 'soybean.png'
-    if (product.slug.includes('baobab')) return 'baobab-oil.png'
-    if (product.slug.includes('cashew')) return 'cashew.png'
+    const s = product.slug.toLowerCase();
+    if (s.includes('shea') && s.includes('oil')) return 'shea-oil.png'
+    if (s.includes('shea')) return 'shea-butter.png'
+    if (s.includes('soy')) return 'soybean.png'
+    if (s.includes('baobab')) return 'baobab-oil.png'
+    if (s.includes('cashew')) return 'cashew-nut.png'
+    if (s.includes('corn') || s.includes('maize')) return 'corn.png'
+    if (s.includes('salt')) return 'unrefined-salt.png'
+    if (s.includes('pepper') || s.includes('chili')) return 'dry-pepper.png'
+    if (s.includes('peanut') || s.includes('groundnut')) return 'peanut.png'
     return 'ginger.png' // Fallback or ginger
   })()
 

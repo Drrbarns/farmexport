@@ -12,12 +12,81 @@ import * as motion from "framer-motion/client"
 export const revalidate = 0
 
 export default async function ProductsPage() {
-  const supabase = await createClient()
-  const { data: products } = await supabase
-    .from('products')
-    .select('*, spec_sheets(file_url)')
-    .eq('is_active', true)
-    .order('created_at', { ascending: true })
+  const defaultProducts: any[] = [
+    {
+      id: '1',
+      name: 'Unrefined (Grade A) Shea Butter',
+      slug: 'unrefined-shea-butter-grade-a',
+      short_desc: 'Premium Grade A unrefined shea butter, sourced directly from African women cooperatives.',
+      spec_sheets: []
+    },
+    {
+      id: '2',
+      name: 'Shea Butter Oil',
+      slug: 'shea-butter-oil',
+      short_desc: 'Pure, unrefined shea oil extracted from premium shea nuts.',
+      spec_sheets: []
+    },
+    {
+      id: '3',
+      name: 'Premium Grade Soybean',
+      slug: 'premium-grade-soybean',
+      short_desc: 'High-quality, non-GMO soybeans suitable for food processing and industrial use.',
+      spec_sheets: []
+    },
+    {
+      id: '4',
+      name: 'Cashew Nut',
+      slug: 'cashew-nut',
+      short_desc: 'Raw cashew nuts sourced from high-yield farms in Ghana and West Africa.',
+      spec_sheets: []
+    },
+    {
+      id: '5',
+      name: 'Yellow Corn (Maize)',
+      slug: 'yellow-corn',
+      short_desc: 'Sun-dried yellow corn, rich in nutrients, suitable for animal feed and human consumption.',
+      spec_sheets: []
+    },
+    {
+      id: '6',
+      name: 'Unrefined Salt',
+      slug: 'unrefined-salt',
+      short_desc: 'Natural, unrefined sea salt harvested from the coast, rich in essential minerals.',
+      spec_sheets: []
+    },
+    {
+      id: '7',
+      name: 'Chili Dry Pepper',
+      slug: 'chili-dry-pepper',
+      short_desc: 'Spicy, sun-dried chili peppers, perfect for culinary and industrial applications.',
+      spec_sheets: []
+    },
+    {
+      id: '8',
+      name: 'Peanuts (Groundnuts)',
+      slug: 'peanuts-groundnuts',
+      short_desc: 'Organic shelled and unshelled peanuts, high in protein and oil content.',
+      spec_sheets: []
+    }
+  ]
+
+  let products = defaultProducts;
+
+  try {
+    const supabase = await createClient()
+    const { data: dbProducts, error } = await supabase
+      .from('products')
+      .select('*, spec_sheets(file_url)')
+      .eq('is_active', true)
+      .order('created_at', { ascending: true })
+
+    if (dbProducts && dbProducts.length > 0) {
+      products = dbProducts
+    }
+  } catch (e) {
+    console.log("Using default products due to DB error")
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

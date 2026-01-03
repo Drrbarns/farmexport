@@ -14,8 +14,8 @@ export default async function Home() {
     },
     {
       id: '2',
-      name: 'Shea Oil',
-      slug: 'shea-oil',
+      name: 'Shea Butter Oil',
+      slug: 'shea-butter-oil',
       short_desc: 'Pure, unrefined shea oil extracted from premium shea nuts.',
       spec_sheets: []
     },
@@ -28,9 +28,37 @@ export default async function Home() {
     },
     {
       id: '4',
-      name: 'Baobab Oil',
-      slug: 'baobab-oil',
-      short_desc: 'Cold-pressed baobab oil rich in vitamins and antioxidants.',
+      name: 'Cashew Nut',
+      slug: 'cashew-nut',
+      short_desc: 'Raw cashew nuts sourced from high-yield farms in Ghana and West Africa.',
+      spec_sheets: []
+    },
+    {
+      id: '5',
+      name: 'Yellow Corn (Maize)',
+      slug: 'yellow-corn',
+      short_desc: 'Sun-dried yellow corn, rich in nutrients, suitable for animal feed and human consumption.',
+      spec_sheets: []
+    },
+    {
+      id: '6',
+      name: 'Unrefined Salt',
+      slug: 'unrefined-salt',
+      short_desc: 'Natural, unrefined sea salt harvested from the coast, rich in essential minerals.',
+      spec_sheets: []
+    },
+    {
+      id: '7',
+      name: 'Chili Dry Pepper',
+      slug: 'chili-dry-pepper',
+      short_desc: 'Spicy, sun-dried chili peppers, perfect for culinary and industrial applications.',
+      spec_sheets: []
+    },
+    {
+      id: '8',
+      name: 'Peanuts (Groundnuts)',
+      slug: 'peanuts-groundnuts',
+      short_desc: 'Organic shelled and unshelled peanuts, high in protein and oil content.',
       spec_sheets: []
     }
   ]
@@ -38,7 +66,7 @@ export default async function Home() {
   try {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    
+
     if (supabaseUrl && supabaseUrl !== 'https://example.supabase.co' && supabaseKey && supabaseKey !== 'public-anon-key') {
       const supabase = await createClient()
 
