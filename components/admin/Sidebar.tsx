@@ -1,10 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { BarChart, Box, FileText, Globe, Image, LayoutDashboard, Settings, Users } from 'lucide-react'
+import { BarChart, Box, FileText, Globe, Image, LayoutDashboard, Settings, Users, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { createClient } from '@/lib/supabase/client'
+import { toast } from 'sonner'
 
 const sidebarItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -18,6 +20,21 @@ const sidebarItems = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+  const supabase = createClient()
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      if (error) throw error
+      
+      toast.success('Signed out successfully')
+      router.push('/')
+      router.refresh()
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to sign out')
+    }
+  }
 
   return (
     <div className="flex h-screen flex-col border-r bg-slate-100/50 w-64 hidden md:flex">
@@ -42,14 +59,10 @@ export function Sidebar() {
         </nav>
       </div>
       <div className="p-4 border-t">
-         {/* Logout button logic would go here */}
-         <Button variant="outline" className="w-full" onClick={() => {
-             // Sign out logic
-             const supabase = require('@/lib/supabase/client').createClient()
-             supabase.auth.signOut().then(() => window.location.href = '/')
-         }}>
-           Sign Out
-         </Button>
+        <Button variant="outline" className="w-full gap-2" onClick={handleSignOut}>
+          <LogOut className="h-4 w-4" />
+          Sign Out
+        </Button>
       </div>
     </div>
   )
