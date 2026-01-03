@@ -6,12 +6,14 @@ import { cn } from '@/lib/utils'
 import { 
   BarChart, Box, FileText, Globe, Image, LayoutDashboard, 
   Settings, Users, LogOut, UserCheck, Package, 
-  TrendingUp, Warehouse, Truck
+  TrendingUp, Warehouse, Truck, X
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import { Separator } from '@/components/ui/separator'
+import { useState } from 'react'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const sidebarItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -45,6 +47,7 @@ export function Sidebar() {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
+  const [open, setOpen] = useState(false)
 
   const handleSignOut = async () => {
     try {
@@ -73,6 +76,7 @@ export function Sidebar() {
               <Link
                 key={subItem.href}
                 href={subItem.href}
+                onClick={() => setOpen(false)}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-slate-200",
                   pathname.startsWith(subItem.href) ? "bg-slate-200 text-slate-900" : "text-slate-500"
@@ -92,6 +96,7 @@ export function Sidebar() {
           <Link
             key={item.href}
             href={item.href}
+            onClick={() => setOpen(false)}
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-slate-200",
               pathname === item.href ? "bg-slate-200 text-slate-900" : "text-slate-500"
@@ -107,8 +112,8 @@ export function Sidebar() {
     })
   }
 
-  return (
-    <div className="flex h-screen flex-col border-r bg-slate-100/50 w-64 hidden md:flex">
+  const sidebarContent = (
+    <>
       <div className="p-6 border-b">
         <h2 className="text-lg font-bold">Admin Panel</h2>
       </div>
@@ -123,7 +128,34 @@ export function Sidebar() {
           Sign Out
         </Button>
       </div>
-    </div>
+    </>
+  )
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <div className="hidden md:flex h-screen flex-col border-r bg-slate-100/50 w-64">
+        {sidebarContent}
+      </div>
+
+      {/* Mobile Sidebar */}
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden fixed top-4 left-4 z-40 bg-white shadow-lg"
+          >
+            <BarChart className="h-5 w-5" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="p-0 w-64 bg-slate-100/50">
+          <div className="flex h-screen flex-col">
+            {sidebarContent}
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   )
 }
 

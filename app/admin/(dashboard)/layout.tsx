@@ -30,7 +30,7 @@ export default async function AdminDashboardLayout({
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto bg-slate-50 p-8">
+      <main className="flex-1 overflow-y-auto bg-slate-50 p-4 md:p-8 pt-20 md:pt-8">
         {children}
       </main>
     </div>
