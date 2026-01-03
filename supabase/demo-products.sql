@@ -1,7 +1,7 @@
 -- Demo Products for Africma's & Dakeb Farm LTD
--- Run this in Supabase SQL Editor after the initial migration
+-- This script updates existing products with enhanced details
+-- Run this in Supabase SQL Editor
 
--- First, let's insert the products
 DO $$
 DECLARE
   v_shea_butter_id uuid;
@@ -12,7 +12,7 @@ DECLARE
   v_ginger_id uuid;
 BEGIN
 
-  -- 1. Unrefined Grade A Shea Butter
+  -- 1. Unrefined Grade A Shea Butter (UPSERT)
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
   VALUES (
     'Unrefined Grade A Shea Butter',
@@ -21,8 +21,18 @@ BEGIN
     'Our Grade A Unrefined Shea Butter is traditionally processed to retain all natural vitamins (A, E, F) and healing properties. Sourced directly from women cooperatives in Northern Ghana, ensuring fair trade and consistent quality. It has a rich nutty aroma and a creamy texture, perfect for skincare formulations, hair products, and confectionery usage. Free from chemicals, additives, and preservatives.',
     true,
     true
-  ) RETURNING id INTO v_shea_butter_id;
+  )
+  ON CONFLICT (slug) 
+  DO UPDATE SET
+    name = EXCLUDED.name,
+    short_desc = EXCLUDED.short_desc,
+    long_desc = EXCLUDED.long_desc,
+    is_featured = EXCLUDED.is_featured,
+    is_active = EXCLUDED.is_active,
+    updated_at = now()
+  RETURNING id INTO v_shea_butter_id;
 
+  -- Update or insert specs for Shea Butter
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
     v_shea_butter_id,
@@ -36,9 +46,22 @@ BEGIN
     '1-2 Weeks',
     ARRAY['Certificate of Analysis (COA)', 'MSDS', 'Phytosanitary Certificate', 'Certificate of Origin', 'Halal/Kosher (upon request)'],
     ARRAY['Cosmetics & Skincare', 'Haircare Products', 'Soaps & Balms', 'Food/Confectionery', 'Pharmaceutical Excipient']
-  );
+  )
+  ON CONFLICT (product_id) 
+  DO UPDATE SET
+    grade_type = EXCLUDED.grade_type,
+    moisture = EXCLUDED.moisture,
+    purity = EXCLUDED.purity,
+    origin = EXCLUDED.origin,
+    packaging_options = EXCLUDED.packaging_options,
+    moq = EXCLUDED.moq,
+    shelf_life = EXCLUDED.shelf_life,
+    lead_time = EXCLUDED.lead_time,
+    documentation = EXCLUDED.documentation,
+    applications = EXCLUDED.applications,
+    updated_at = now();
 
-  -- 2. Refined Shea Oil
+  -- 2. Premium Shea Oil
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
   VALUES (
     'Premium Shea Oil',
@@ -47,7 +70,16 @@ BEGIN
     'Shea Oil is the liquid fraction of Shea Butter, offering intense hydration without the solid waxy feel. It stays liquid at room temperature and is highly rich in oleic and stearic acids. Ideal for premium cosmetic formulations that require quick absorption and a smooth finish. Our cold-pressed method ensures maximum retention of beneficial properties while providing extended shelf life and stability in various climates.',
     true,
     true
-  ) RETURNING id INTO v_shea_oil_id;
+  )
+  ON CONFLICT (slug) 
+  DO UPDATE SET
+    name = EXCLUDED.name,
+    short_desc = EXCLUDED.short_desc,
+    long_desc = EXCLUDED.long_desc,
+    is_featured = EXCLUDED.is_featured,
+    is_active = EXCLUDED.is_active,
+    updated_at = now()
+  RETURNING id INTO v_shea_oil_id;
 
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
@@ -62,7 +94,20 @@ BEGIN
     '2 Weeks',
     ARRAY['COA', 'MSDS', 'Certificate of Origin', 'Allergen Statement'],
     ARRAY['Massage Oils', 'Body Lotions', 'Hair Serums', 'Aromatherapy Base', 'Lip Care Products']
-  );
+  )
+  ON CONFLICT (product_id) 
+  DO UPDATE SET
+    grade_type = EXCLUDED.grade_type,
+    moisture = EXCLUDED.moisture,
+    purity = EXCLUDED.purity,
+    origin = EXCLUDED.origin,
+    packaging_options = EXCLUDED.packaging_options,
+    moq = EXCLUDED.moq,
+    shelf_life = EXCLUDED.shelf_life,
+    lead_time = EXCLUDED.lead_time,
+    documentation = EXCLUDED.documentation,
+    applications = EXCLUDED.applications,
+    updated_at = now();
 
   -- 3. Premium Grade Soybean
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -73,7 +118,16 @@ BEGIN
     'We supply premium quality soybeans cultivated in the fertile agricultural belts of Ghana. Our soybeans are carefully harvested at optimal maturity, cleaned, and dried to ensure low moisture content and high protein value. Perfect for soy milk production, tofu manufacturing, oil extraction, and high-quality animal feed. Each batch undergoes rigorous quality control to meet international standards for food safety and nutritional content.',
     true,
     true
-  ) RETURNING id INTO v_soybean_id;
+  )
+  ON CONFLICT (slug) 
+  DO UPDATE SET
+    name = EXCLUDED.name,
+    short_desc = EXCLUDED.short_desc,
+    long_desc = EXCLUDED.long_desc,
+    is_featured = EXCLUDED.is_featured,
+    is_active = EXCLUDED.is_active,
+    updated_at = now()
+  RETURNING id INTO v_soybean_id;
 
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
@@ -88,7 +142,20 @@ BEGIN
     '2-3 Weeks',
     ARRAY['Phytosanitary Certificate', 'Fumigation Certificate', 'Certificate of Origin', 'Quality Certificate', 'Non-GMO Declaration'],
     ARRAY['Food Processing (Soy Milk/Tofu)', 'Oil Extraction', 'Animal Feed', 'Protein Concentrate']
-  );
+  )
+  ON CONFLICT (product_id) 
+  DO UPDATE SET
+    grade_type = EXCLUDED.grade_type,
+    moisture = EXCLUDED.moisture,
+    purity = EXCLUDED.purity,
+    origin = EXCLUDED.origin,
+    packaging_options = EXCLUDED.packaging_options,
+    moq = EXCLUDED.moq,
+    shelf_life = EXCLUDED.shelf_life,
+    lead_time = EXCLUDED.lead_time,
+    documentation = EXCLUDED.documentation,
+    applications = EXCLUDED.applications,
+    updated_at = now();
 
   -- 4. Cold-Pressed Baobab Oil
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
@@ -99,7 +166,16 @@ BEGIN
     'Extracted from the seeds of the African Baobab fruit, this cold-pressed oil is a powerhouse of antioxidants and essential fatty acids. It absorbs quickly into the skin, improves elasticity, and promotes cell regeneration. Rich in Vitamins A, D, E, and F, it is a highly sought-after ingredient for high-end beauty and wellness brands. Our ethical sourcing practices support local communities while ensuring product purity and sustainability.',
     true,
     true
-  ) RETURNING id INTO v_baobab_oil_id;
+  )
+  ON CONFLICT (slug) 
+  DO UPDATE SET
+    name = EXCLUDED.name,
+    short_desc = EXCLUDED.short_desc,
+    long_desc = EXCLUDED.long_desc,
+    is_featured = EXCLUDED.is_featured,
+    is_active = EXCLUDED.is_active,
+    updated_at = now()
+  RETURNING id INTO v_baobab_oil_id;
 
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
@@ -114,9 +190,22 @@ BEGIN
     '1-2 Weeks',
     ARRAY['COA', 'MSDS', 'Organic Certificate (available)', 'Certificate of Origin'],
     ARRAY['Anti-aging Creams', 'Face Serums', 'Body Oils', 'Hair Conditioning Treatments', 'Nail & Cuticle Care']
-  );
+  )
+  ON CONFLICT (product_id) 
+  DO UPDATE SET
+    grade_type = EXCLUDED.grade_type,
+    moisture = EXCLUDED.moisture,
+    purity = EXCLUDED.purity,
+    origin = EXCLUDED.origin,
+    packaging_options = EXCLUDED.packaging_options,
+    moq = EXCLUDED.moq,
+    shelf_life = EXCLUDED.shelf_life,
+    lead_time = EXCLUDED.lead_time,
+    documentation = EXCLUDED.documentation,
+    applications = EXCLUDED.applications,
+    updated_at = now();
 
-  -- 5. Raw Cashew Nuts (RCN)
+  -- 5. Raw Cashew Nuts (RCN) - NEW PRODUCT
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
   VALUES (
     'Raw Cashew Nuts in Shell',
@@ -125,7 +214,16 @@ BEGIN
     'Our Raw Cashew Nuts are carefully sourced from smallholder farmers across Ghana. Each nut is sun-dried to optimal moisture levels and sorted to remove defects. With a high kernel outturn rate (KOR) of 48-52 lbs per 80kg bag, our RCN is perfect for processors looking for consistent quality and competitive pricing. We work directly with farming cooperatives to ensure traceability and fair trade practices throughout the supply chain.',
     false,
     true
-  ) RETURNING id INTO v_cashew_id;
+  )
+  ON CONFLICT (slug) 
+  DO UPDATE SET
+    name = EXCLUDED.name,
+    short_desc = EXCLUDED.short_desc,
+    long_desc = EXCLUDED.long_desc,
+    is_featured = EXCLUDED.is_featured,
+    is_active = EXCLUDED.is_active,
+    updated_at = now()
+  RETURNING id INTO v_cashew_id;
 
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
@@ -140,9 +238,22 @@ BEGIN
     '3-4 Weeks (Seasonal availability)',
     ARRAY['Certificate of Origin', 'Phytosanitary Certificate', 'Fumigation Certificate', 'Quality Certificate', 'Weight Certificate'],
     ARRAY['Cashew Processing Plants', 'Kernel Extraction', 'Cashew Nut Shell Liquid (CNSL) Production']
-  );
+  )
+  ON CONFLICT (product_id) 
+  DO UPDATE SET
+    grade_type = EXCLUDED.grade_type,
+    moisture = EXCLUDED.moisture,
+    purity = EXCLUDED.purity,
+    origin = EXCLUDED.origin,
+    packaging_options = EXCLUDED.packaging_options,
+    moq = EXCLUDED.moq,
+    shelf_life = EXCLUDED.shelf_life,
+    lead_time = EXCLUDED.lead_time,
+    documentation = EXCLUDED.documentation,
+    applications = EXCLUDED.applications,
+    updated_at = now();
 
-  -- 6. Dried Ginger Root
+  -- 6. Dried Ginger Root - NEW PRODUCT
   INSERT INTO products (name, slug, short_desc, long_desc, is_featured, is_active)
   VALUES (
     'Premium Dried Ginger Root',
@@ -151,7 +262,16 @@ BEGIN
     'Our premium dried ginger is sourced from the best farms in Ghana, known for producing ginger with high essential oil content and pungency. Each batch is carefully cleaned, sliced or kept whole, and dried using controlled methods to preserve flavor and medicinal properties. Ideal for grinding into powder, use in herbal teas, food processing, and pharmaceutical applications. We offer both organic and conventional options with full traceability.',
     false,
     true
-  ) RETURNING id INTO v_ginger_id;
+  )
+  ON CONFLICT (slug) 
+  DO UPDATE SET
+    name = EXCLUDED.name,
+    short_desc = EXCLUDED.short_desc,
+    long_desc = EXCLUDED.long_desc,
+    is_featured = EXCLUDED.is_featured,
+    is_active = EXCLUDED.is_active,
+    updated_at = now()
+  RETURNING id INTO v_ginger_id;
 
   INSERT INTO product_specs (product_id, grade_type, moisture, purity, origin, packaging_options, moq, shelf_life, lead_time, documentation, applications)
   VALUES (
@@ -166,10 +286,25 @@ BEGIN
     '2 Weeks',
     ARRAY['Phytosanitary Certificate', 'Certificate of Origin', 'Fumigation Certificate', 'COA', 'Organic Certificate (if applicable)'],
     ARRAY['Spice Manufacturing', 'Food & Beverage Industry', 'Herbal Tea Blends', 'Health Supplements', 'Pharmaceutical Ingredients']
-  );
+  )
+  ON CONFLICT (product_id) 
+  DO UPDATE SET
+    grade_type = EXCLUDED.grade_type,
+    moisture = EXCLUDED.moisture,
+    purity = EXCLUDED.purity,
+    origin = EXCLUDED.origin,
+    packaging_options = EXCLUDED.packaging_options,
+    moq = EXCLUDED.moq,
+    shelf_life = EXCLUDED.shelf_life,
+    lead_time = EXCLUDED.lead_time,
+    documentation = EXCLUDED.documentation,
+    applications = EXCLUDED.applications,
+    updated_at = now();
 
 END $$;
 
 -- Success message
-SELECT 'Successfully inserted 6 demo products with specifications!' as message;
-
+SELECT 
+  'Successfully updated/inserted 6 products!' as status,
+  (SELECT COUNT(*) FROM products) as total_products,
+  (SELECT COUNT(*) FROM products WHERE is_featured = true) as featured_products;
