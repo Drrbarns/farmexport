@@ -1,0 +1,5 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#F8FAFC" />
+      <circle cx="300" cy="200" r="120" fill="#F8E4B0" />
+      <text x="50%" y="50%" font-family="Arial" font-size="30" fill="#0A2918" text-anchor="middle">Shea Butter</text>
+    </svg>
