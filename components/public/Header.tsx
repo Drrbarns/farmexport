@@ -43,11 +43,11 @@ export function Header() {
       )}
     >
       <div className="container flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-3 group relative z-50">
+        <Link href="/" className="flex items-center space-x-3 group relative z-50 ml-4">
           <img
             src="/images/logo.png"
             alt="Africmas Dakeb Logo"
-            className="h-12 w-auto object-contain"
+            className="h-16 w-auto object-contain"
           />
         </Link>
 
