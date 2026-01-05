@@ -58,6 +58,34 @@ VALUES
     'Organic shelled and unshelled peanuts, high in protein and oil content.',
     true,
     true
+  ),
+  (
+    'Sesame Seeds',
+    'sesame-seeds',
+    'High-quality white and mixed sesame seeds, rich in oil and flavor.',
+    true,
+    true
+  ),
+  (
+    'Sesame Oil',
+    'sesame-oil',
+    'Pure, golden sesame oil extracted from premium seeds.',
+    true,
+    true
+  ),
+  (
+    'Baobab Cake (Animal Feed)',
+    'baobab-cake',
+    'Nutrient-rich baobab fruit pulp cake, excellent for sustainable animal feed.',
+    true,
+    true
+  ),
+  (
+    'Premium Local Rice',
+    'local-rice',
+    'Aromatic and clean local parboiled rice, stone-free and high quality.',
+    true,
+    true
   )
 ON CONFLICT (slug) DO UPDATE
 SET 

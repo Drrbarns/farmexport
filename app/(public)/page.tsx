@@ -60,6 +60,34 @@ export default async function Home() {
       slug: 'peanuts-groundnuts',
       short_desc: 'Organic shelled and unshelled peanuts, high in protein and oil content.',
       spec_sheets: []
+    },
+    {
+      id: '9',
+      name: 'Sesame Seeds',
+      slug: 'sesame-seeds',
+      short_desc: 'High-quality white and mixed sesame seeds, rich in oil and flavor.',
+      spec_sheets: []
+    },
+    {
+      id: '10',
+      name: 'Sesame Oil',
+      slug: 'sesame-oil',
+      short_desc: 'Pure, golden sesame oil extracted from premium seeds.',
+      spec_sheets: []
+    },
+    {
+      id: '11',
+      name: 'Baobab Cake (Animal Feed)',
+      slug: 'baobab-cake',
+      short_desc: 'Nutrient-rich baobab fruit pulp cake, excellent for sustainable animal feed.',
+      spec_sheets: []
+    },
+    {
+      id: '12',
+      name: 'Premium Local Rice',
+      slug: 'local-rice',
+      short_desc: 'Aromatic and clean local parboiled rice, stone-free and high quality.',
+      spec_sheets: []
     }
   ]
 

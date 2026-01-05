@@ -64,3 +64,4 @@ Add these same variables in Vercel Dashboard > Settings > Environment Variables
 2. Create an API key
 3. Verify your sending domain
 
+

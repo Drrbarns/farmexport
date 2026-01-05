@@ -21,10 +21,14 @@ export function ProductCard({ product }: ProductCardProps) {
   // Determine image based on slug
   const imageSrc = (() => {
     const s = product.slug.toLowerCase();
+    if (s.includes('sesame') && s.includes('oil')) return 'sesame-oil.png'
+    if (s.includes('sesame')) return 'sesame-seeds.png'
+    if (s.includes('baobab') && s.includes('cake')) return 'baobab-cake.png'
+    if (s.includes('baobab')) return 'baobab-oil.png'
+    if (s.includes('rice')) return 'local-rice.png'
     if (s.includes('shea') && s.includes('oil')) return 'shea-oil.png'
     if (s.includes('shea')) return 'shea-butter.png'
     if (s.includes('soy')) return 'soybean.png'
-    if (s.includes('baobab')) return 'baobab-oil.png'
     if (s.includes('cashew')) return 'cashew-nut.png'
     if (s.includes('corn') || s.includes('maize')) return 'corn.png'
     if (s.includes('salt')) return 'unrefined-salt.png'
