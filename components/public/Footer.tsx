@@ -11,9 +11,13 @@ export function Footer() {
 
           {/* Company Info */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold text-white tracking-tight">
-              Africma's & <span className="text-accent">Dakeb Farm</span>
-            </h3>
+            <Link href="/" className="block">
+              <img
+                src="/images/logo.png"
+                alt="Africmas Dakeb Logo"
+                className="h-16 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </Link>
             <p className="text-slate-400 leading-relaxed">
               Your trusted partner for premium Grade A Unrefined Shea Butter, Shea Oil, and agricultural exports from Africa to the world. Sustainable, ethical, and reliable.
             </p>

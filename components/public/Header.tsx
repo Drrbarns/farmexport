@@ -34,36 +34,21 @@ export function Header() {
   }, [])
 
   return (
-    <header 
+    <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled 
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border py-3" 
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border py-3"
           : "bg-transparent py-6"
       )}
     >
       <div className="container flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-3 group relative z-50">
-          <div className={cn(
-            "h-10 w-10 rounded-xl flex items-center justify-center transition-colors shadow-lg",
-            scrolled ? "bg-primary text-white" : "bg-white text-primary"
-          )}>
-            <Globe className="h-6 w-6" />
-          </div>
-          <div className="flex flex-col">
-            <span className={cn(
-              "font-bold text-lg leading-none tracking-tight",
-              scrolled ? "text-slate-900" : "text-white"
-            )}>
-              Africma’s & Dakeb
-            </span>
-            <span className={cn(
-              "text-[10px] font-bold uppercase tracking-widest opacity-80",
-              scrolled ? "text-slate-500" : "text-white/80"
-            )}>
-              Farm Export LTD
-            </span>
-          </div>
+          <img
+            src="/images/logo.png"
+            alt="Africmas Dakeb Logo"
+            className="h-12 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -74,8 +59,8 @@ export function Header() {
               href={link.href}
               className={cn(
                 "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
-                scrolled 
-                  ? "text-slate-600 hover:text-primary hover:bg-slate-50" 
+                scrolled
+                  ? "text-slate-600 hover:text-primary hover:bg-slate-50"
                   : "text-white/90 hover:text-white hover:bg-white/10"
               )}
             >
@@ -85,8 +70,8 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
-          <a 
-            href="https://wa.me/233248209525" 
+          <a
+            href="https://wa.me/233248209525"
             className={cn(
               "text-sm font-bold flex items-center gap-2 px-4 py-2 rounded-full transition-colors",
               scrolled ? "text-slate-700 hover:bg-slate-100" : "text-white hover:bg-white/10"
@@ -95,8 +80,8 @@ export function Header() {
             <Phone className="h-4 w-4" />
             <span>+233 55 512 3456</span>
           </a>
-          <Button 
-            asChild 
+          <Button
+            asChild
             className={cn(
               "font-bold shadow-lg transition-all hover:scale-105 rounded-full px-6",
               !scrolled && "bg-white text-primary hover:bg-white/90"
@@ -110,9 +95,9 @@ export function Header() {
         <div className="flex lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className={cn(
                   "hover:bg-white/20",
                   scrolled ? "text-slate-900" : "text-white"
