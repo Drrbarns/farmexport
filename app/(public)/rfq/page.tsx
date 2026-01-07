@@ -7,6 +7,21 @@ import * as motion from "framer-motion/client"
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Request a Quote | Wholesale African Commodities',
+  description: 'Get a competitive wholesale quote for Shea Butter, Sesame, Soybeans, and other premium African agricultural products. Fast turnaround on proforma invoices.',
+  openGraph: {
+    title: 'Request a Quote | Wholesale African Commodities',
+    description: 'Get a competitive wholesale quote for Shea Butter, Sesame, Soybeans, and other premium African agricultural products.',
+    url: 'https://africmasdakebfarmltd.com/rfq',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com/rfq',
+  }
+}
+
 export default async function RFQPage({ searchParams }: { searchParams: { product?: string } }) {
   const supabase = await createClient()
   const { data: products } = await supabase

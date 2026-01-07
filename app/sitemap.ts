@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Since I don't have the service key exposed in code, I'll skip dynamic DB fetch for sitemap in this specific plan implementation to avoid build errors if env vars are missing.
   // I'll just list the static routes and structure.
 
-  const baseUrl = 'https://africmadakeb.com' // Placeholder
+  const baseUrl = 'https://africmasdakebfarmltd.com'
 
   const routes = [
     '',

@@ -16,6 +16,21 @@ import {
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Contact Us | Africma’s & Dakeb Farm Information',
+  description: 'Get in touch with our export team. Headquartered in Accra, Ghana. We are ready to handle your wholesale agricultural orders.',
+  openGraph: {
+    title: 'Contact Us | Africma’s & Dakeb Farm Information',
+    description: 'Get in touch with our export team. Headquartered in Accra, Ghana. We are ready to handle your wholesale agricultural orders.',
+    url: 'https://africmasdakebfarmltd.com/contact',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com/contact',
+  }
+}
+
 export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-screen">

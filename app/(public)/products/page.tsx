@@ -11,6 +11,21 @@ import * as motion from "framer-motion/client"
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Our Products | Premium African Agricultural Commodities',
+  description: 'Explore our catalogue of export-grade Shea Butter, Sesame Seeds, Cashew Nuts, Soybeans, Baobab, and more. Direct from African farms to your port.',
+  openGraph: {
+    title: 'Our Products | Premium African Agricultural Commodities',
+    description: 'Explore our catalogue of export-grade Shea Butter, Sesame Seeds, Cashew Nuts, Soybeans, Baobab, and more.',
+    url: 'https://africmasdakebfarmltd.com/products',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com/products',
+  }
+}
+
 export default async function ProductsPage() {
   const defaultProducts: any[] = [
     {

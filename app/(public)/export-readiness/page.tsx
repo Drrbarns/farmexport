@@ -9,6 +9,21 @@ import * as motion from "framer-motion/client"
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Export Logistics & Shipping | Global Supply Chain',
+  description: 'Seamless global logistics, shipping methods (FCL/LCL), and compliance. We adhere to international Incoterms and quality standards for all exports.',
+  openGraph: {
+    title: 'Export Logistics & Shipping | Global Supply Chain',
+    description: 'Seamless global logistics, shipping methods (FCL/LCL), and compliance. We adhere to international Incoterms and quality standards.',
+    url: 'https://africmasdakebfarmltd.com/export-readiness',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com/export-readiness',
+  }
+}
+
 export default async function ExportReadinessPage() {
   const supabase = await createClient()
 

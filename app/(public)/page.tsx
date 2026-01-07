@@ -3,6 +3,21 @@ import { HomePage } from '@/components/marketing/HomePage'
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Africma’s & Dakeb Farm LTD | Premium African Agricultural Exporter',
+  description: 'Sourcing and exporting Grade A Unrefined Shea Butter, Sesame, Soybeans, and more from Africa to the world. Your trusted partner for ethical and sustainable agro-trade.',
+  openGraph: {
+    title: 'Africma’s & Dakeb Farm LTD | Premium African Agricultural Exporter',
+    description: 'Sourcing and exporting Grade A Unrefined Shea Butter, Sesame, Soybeans, and more from Africa to the world.',
+    url: 'https://africmasdakebfarmltd.com',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com',
+  }
+}
+
 export default async function Home() {
   let products: any[] = [
     {

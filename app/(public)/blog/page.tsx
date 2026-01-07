@@ -8,9 +8,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as motion from "framer-motion/client"
 
-export const metadata = {
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
     title: 'Insights & News | Africma\'s & Dakeb Farm LTD',
-    description: 'Latest updates on agricultural trends, export markets, and sustainable farming practices.'
+    description: 'Latest updates on agricultural trends, export markets, and sustainable farming practices. Stay informed on the Shea, Cocoa, and Grain markets.',
+    openGraph: {
+        title: 'Insights & News | Africma\'s & Dakeb Farm LTD',
+        description: 'Latest updates on agricultural trends, export markets, and sustainable farming practices.',
+        url: 'https://africmasdakebfarmltd.com/blog',
+    },
+    alternates: {
+        canonical: 'https://africmasdakebfarmltd.com/blog',
+    }
 }
 
 // Mock data until Supabase table is connected

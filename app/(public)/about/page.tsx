@@ -9,6 +9,21 @@ import Image from 'next/image'
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Us | Africma’s & Dakeb Farm LTD',
+  description: 'Our mission is to bridge the gap between African farmers and global markets through ethical sourcing, sustainability, and quality assurance.',
+  openGraph: {
+    title: 'About Us | Africma’s & Dakeb Farm LTD',
+    description: 'Our mission is to bridge the gap between African farmers and global markets through ethical sourcing, sustainability, and quality assurance.',
+    url: 'https://africmasdakebfarmltd.com/about',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com/about',
+  }
+}
+
 export default async function AboutPage() {
   const supabase = await createClient()
 

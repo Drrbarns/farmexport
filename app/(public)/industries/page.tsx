@@ -10,6 +10,21 @@ import * as motion from "framer-motion/client"
 
 export const revalidate = 0
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Industries Served | Cosmetics, Food & Pharma Ingredients',
+  description: 'Supplying premium raw ingredients like Shea Butter, Soybean, and Oils for the Cosmetics, Food & Beverage, Pharmaceutical, and Animal Feed industries globally.',
+  openGraph: {
+    title: 'Industries Served | Cosmetics, Food & Pharma Ingredients',
+    description: 'Supplying premium raw ingredients like Shea Butter, Soybean, and Oils for the Cosmetics, Food & Beverage, Pharmaceutical, and Animal Feed industries globally.',
+    url: 'https://africmasdakebfarmltd.com/industries',
+  },
+  alternates: {
+    canonical: 'https://africmasdakebfarmltd.com/industries',
+  }
+}
+
 export default async function IndustriesPage() {
   const supabase = await createClient()
 
