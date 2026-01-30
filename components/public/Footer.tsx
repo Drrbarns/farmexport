@@ -91,6 +91,9 @@ export function Footer() {
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Trade</Link>
+            <a href="https://doctorbarns.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              Powered By Doctor Barns Tech
+            </a>
           </div>
         </div>
       </div>
